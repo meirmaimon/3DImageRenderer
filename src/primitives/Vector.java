@@ -31,8 +31,6 @@ public class Vector {
      * @return New vector represents the vector addition
      */
     public Vector add(Vector vec){
-        if (head == null)
-            throw new ArithmeticException("Cannot add vector to empty vector");
         Point3D add = head.add(vec);    //Point 3D method "add" add the 2 vector coordinate
         return new Vector(add);
     }
@@ -47,8 +45,6 @@ public class Vector {
      * @return New vector represents the Vector Subtraction
      */
     public Vector subtract(Vector vec){
-        if (head == null)
-            throw new ArithmeticException("Cannot add vector to empty vector");
         return head.subtract(vec.getHead());
     }
     /**
@@ -57,8 +53,6 @@ public class Vector {
      * @return New vector represents the Scalar multiplication:
      */
     public Vector scale(double scalar){
-        if (head == null)
-            throw new ArithmeticException("Cannot scale an empty vector");
         Point3D scaled = new Point3D(head.x.coord*scalar ,
                 head.y.coord*scalar ,
                 head.z.coord*scalar);
