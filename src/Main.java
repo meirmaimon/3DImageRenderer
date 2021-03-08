@@ -1,6 +1,12 @@
 import primitives.*;
 import static java.lang.System.out;
 import static primitives.Util.*;
+/*
+Yahav Davidzada 318356268
+Meir Maimon 315742023
+Yahav.yahav90@gmail.com
+maimonmeir8@gmail.com
+ */
 
 /**
  * Test program for the 1st stage
