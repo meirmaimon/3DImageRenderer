@@ -11,13 +11,13 @@ import primitives.Vector;
  */
 public class Cylinder extends Tube{
 
-    double height;
+    private double height;
 
     /**
      * Creates a Cylinder with given height radius and a ray
      * @param axisRay Cylinder's axis ray
      * @param radius Cylinder's radius - must be greater than 0
-     * @param height Cylinde's height
+     * @param height Cylinder's height
      */
     public Cylinder(Ray axisRay, double radius, double height) {
         super(axisRay, radius);
@@ -26,6 +26,10 @@ public class Cylinder extends Tube{
         this.height = height;
     }
 
+    /**
+     * This methods returns the height of the cylinder
+     * @return Cylinder's height
+     */
     public double getHeight() {
         return height;
     }

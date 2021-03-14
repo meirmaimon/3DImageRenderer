@@ -8,7 +8,9 @@ public class Point3D {
     final Coordinate x;
     final Coordinate y;
     final Coordinate z;
-
+    /**
+     * Point zero represents the point of the origin
+     */
     public final static Point3D ZERO= new Point3D(0,0,0);
 
     /**

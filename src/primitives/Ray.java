@@ -7,8 +7,8 @@ import java.util.Objects;
  * Coordinate system
  */
 public class Ray {
-    Point3D p0;
-    Vector dir;
+    private Point3D p0;
+    private Vector dir;
 
     /**
      * Creates a ray with given a point and direction
@@ -20,10 +20,18 @@ public class Ray {
         this.dir = dir.normalized();
     }
 
+    /**
+     * Gets the ray's head
+     * @return Ray's head
+     */
     public Point3D getP0() {
         return p0;
     }
 
+    /**
+     * Gets the direction vector of the ray
+     * @return Ray's direction
+     */
     public Vector getDir() {
         return dir;
     }

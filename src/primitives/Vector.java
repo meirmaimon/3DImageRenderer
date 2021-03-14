@@ -1,26 +1,45 @@
 package primitives;
 
+import static primitives.Util.*;
+
 /**
- * This class represents a vector in the Cartsian
+ * This class represents a vector in the Cartesian
  * Coordinate system
  */
 public class Vector {
     private Point3D head;
 
+    /**
+     * Creates a vector given a point
+     * @param head The Vector's head
+     */
     public Vector(Point3D head) {
-        if (head.x.coord == 0 && head.y.coord == 0 && head.z.coord == 0 )
+        if (head.equals(Point3D.ZERO))
             throw new IllegalArgumentException("Vector 0 is not valid");
         this.head = head;
     }
 
+    /**
+     * Creates a vecotr given the values of the
+     * head point
+     * @param x X value
+     * @param y Y value
+     * @param z Z value
+     */
     public Vector(double x, double y, double z) {
-        if (x == 0 && y == 0 && z == 0)
+        if (isZero(x) && isZero(y) && isZero(z))
             throw new IllegalArgumentException("Vector 0 is not valid");
         this.head = new Point3D(x,y,z);
     }
 
+    /**
+     * Creates a vector given the point coordinate
+     * @param x x coordinate
+     * @param y y coordinate
+     * @param z z coordinate
+     */
     public Vector(Coordinate x, Coordinate y, Coordinate z ) {
-        if (x.coord == 0 && y.coord == 0 && z.coord ==0)
+        if (x.equals(0) && y.equals(0) && z.equals(0))
             throw new IllegalArgumentException("Vector 0 is not valid");
         this.head = new Point3D(x,y,z);
     }
@@ -35,6 +54,10 @@ public class Vector {
         return new Vector(add);
     }
 
+    /**
+     * Gets the vector's head point
+     * @return vector's head point
+     */
     public Point3D getHead() {
         return head;
     }

@@ -9,23 +9,42 @@ import primitives.Vector;
  */
 public class Plane implements Geometry {
 
-    Point3D q0;
-    Vector normal;
+    private Point3D q0;
+    private Vector normal;
 
+    /**
+     * Creats a plane given point and normal
+     * @param q0 point on the plane
+     * @param normal vector normal to the plane
+     */
     public Plane(Point3D q0, Vector normal) {
         this.q0 = q0;
         this.normal = normal;
     }
 
+    /**
+     * Creates a plane given three points
+     * @param p1 point on the plane
+     * @param p2 point on the plane
+     * @param p3 point on the plane
+     */
     public Plane(Point3D p1 ,Point3D p2 ,Point3D p3) {
         this.q0 = p1;
         this.normal = null;          //full implementation in week2
     }
 
+    /**
+     * Gets the plane's point
+     * @return the plane's point
+     */
     public Point3D getQ0() {
         return q0;
     }
 
+    /**
+     * gets the normal vector of the plane
+     * @return plane's normal vector
+     */
     public Vector getNormal() {
         return normal;
     }

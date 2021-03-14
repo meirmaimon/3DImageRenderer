@@ -11,8 +11,8 @@ import primitives.Vector;
  */
 public class Sphere implements Geometry{
 
-    Point3D center;
-    double radius;
+    private Point3D center;
+    private double radius;
 
     /**
      * Creates a Sphere with point a radius given
@@ -26,10 +26,18 @@ public class Sphere implements Geometry{
         this.radius = radius;
     }
 
+    /**
+     * Gets the sphere's center point
+     * @return sphere's center point
+     */
     public Point3D getCenter() {
         return center;
     }
 
+    /**
+     * Gets the sphere's radius
+     * @return Gets the sphere's radius
+     */
     public double getRadius() {
         return radius;
     }
