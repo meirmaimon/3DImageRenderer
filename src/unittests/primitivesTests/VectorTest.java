@@ -256,15 +256,15 @@ public class VectorTest {
         // ============ Equivalence Partitions Tests ==============
         // TC01: positive
         Vector v1 = new Vector(1,2,2);
-        assertEquals("cant normalize" , new Vector(1/3,2/3,2/3),v1.normalize());
+        assertEquals("cant normalize" , new Vector((double) 1/3,(double)2/3,(double)2/3),v1.normalize());
 
         // TC02: negative
         Vector v2 = new Vector(-1,-2,-2);
-        assertEquals("cant normalize" , new Vector(-1/3,-2/3,-2/3),v2.normalize());
+        assertEquals("cant normalize" , new Vector((double)-1/3,(double)-2/3,(double)-2/3),v2.normalize());
 
         // TC03: already normalize
-        Vector v3 = new Vector(1/(Math.sqrt(3)),1/(Math.sqrt(3)),1/(Math.sqrt(3)));
-        assertEquals("cant normalize" , new Vector(1,1,1),v2.normalize());
+        Vector v3 = new Vector((double)1/(Math.sqrt(3)),(double)1/(Math.sqrt(3)),(double)1/(Math.sqrt(3)));
+        assertEquals("cant normalize" , v3 ,v3.normalize());
 
         // =============== Boundary Values Tests ==================
     }
