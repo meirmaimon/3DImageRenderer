@@ -49,7 +49,7 @@ public class Cylinder extends Tube{
         Vector opposite = axisRay.getDir();
         Vector hypotenuse = point.subtract(p0);
         double t = hypotenuse.dotProduct(opposite);
-        if (t == height || t == height*-1)          // point is on the bases of the cylinder
+        if (t == height || t == 0)          // point is on the bases of the cylinder
             return opposite;                        // axisRay vector
 
         Point3D center = p0.add(opposite.scale(t));

@@ -17,7 +17,11 @@ public class SphereTest {
      */
     @Test
     public void getCenter() {
-        fail("Not implemented yet");
+        // ============ Equivalence Partitions Tests ==============
+        // TC01: simple test
+        Sphere sp = new Sphere(new Point3D(1,1,1),1);
+        Point3D p = sp.getCenter();
+        assertEquals("getCenter() wrong result",new Point3D(1,1,1),p);
     }
     /**
      * Test methods for
@@ -25,7 +29,10 @@ public class SphereTest {
      */
     @Test
     public void getRadius() {
-        fail("Not implemented yet");
+        // ============ Equivalence Partitions Tests ==============
+        // TC01: simple test
+        Sphere sp = new Sphere(new Point3D(1,1,1),1);
+        assertEquals("getRadius() wrong result",1,1);
     }
 
     /**
@@ -40,6 +47,5 @@ public class SphereTest {
         Point3D p = new Point3D(1,0,0);
         Vector normal = sp.getNormal(p);
         assertEquals("Sphere getNormal() wrong result",new Vector(1,0,0),normal);
-
     }
 }
