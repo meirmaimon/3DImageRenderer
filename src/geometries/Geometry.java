@@ -11,7 +11,7 @@ import primitives.Vector;
 public interface Geometry {
     /**
      * This methods return the normal vector
-     * of the pount that on the geometry surface
+     * of the point that on the geometry surface
      * @param point point on the geometry
      * @return the normal vector of the point
      */

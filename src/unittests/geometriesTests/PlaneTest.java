@@ -3,6 +3,7 @@ package unittests.geometriesTests;
 import geometries.Plane;
 import org.junit.Test;
 import primitives.Point3D;
+import primitives.Vector;
 
 import static org.junit.Assert.*;
 /**
@@ -14,16 +15,26 @@ public class PlaneTest {
      * {@link Plane#getQ0()}
      */
     @Test
-    public void getQ0() {
-        fail("Not implemented yet");
+    public void testGetQ0() {
+        // ============ Equivalence Partitions Tests ==============
+        // TC01
+        Point3D p3= new Point3D(1,2,2);
+        Vector v = new Vector(2,2,2);
+        Plane p = new Plane(p3,v);
+        assertEquals("not the same point ", p.getQ0() , p3);
     }
     /**
      * Test method for
      * {@link Plane#getNormal()} ()}
      */
     @Test
-    public void getNormal() {
-        fail("Not implemented yet");
+    public void testGetNormal() {
+        // ============ Equivalence Partitions Tests ==============
+        // TC01
+        Point3D p3= new Point3D(1,2,2);
+        Vector v = new Vector(2,2,2);
+        Plane p = new Plane(p3,v);
+        assertEquals("not the same normal ", p.getNormal() , v);
     }
 
     /**
@@ -31,7 +42,13 @@ public class PlaneTest {
      * {@link geometries.Plane#getNormal(Point3D)}
      */
     @Test
-    public void testGetNormal() {
-        fail("Not implemented yet");
+    public void testGetNormalWithPoint() {
+        // ============ Equivalence Partitions Tests ==============
+        // TC01
+        Point3D p3= new Point3D(1,2,2);
+        Vector v = new Vector(2,2,2);
+        Plane p = new Plane(p3,v);
+        assertEquals("not the same normal ", p.getNormal() , v);
+
     }
 }
