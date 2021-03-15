@@ -1,5 +1,6 @@
 package unittests.geometriesTests;
 
+import geometries.Plane;
 import geometries.Tube;
 import org.junit.Test;
 import primitives.Point3D;
@@ -18,7 +19,15 @@ public class TubeTest {
      */
     @Test
     public void getAxisRay() {
-        fail("Not implemented yet");
+        // ============ Equivalence Partitions Tests ==============
+        // TC01
+        Point3D p3= new Point3D(1,2,2);
+        Vector v = new Vector(2,2,2);
+        Ray r = new Ray(p3,v);
+        double rad = 3;
+        Tube t = new Tube(r,rad);
+        assertEquals("not the Axis Ray ", t.getAxisRay() , r);
+
     }
     /**
      * Test method for
@@ -26,7 +35,15 @@ public class TubeTest {
      */
     @Test
     public void getRadius() {
-        fail("Not implemented yet");
+        // ============ Equivalence Partitions Tests ==============
+        // TC01
+        Point3D p3= new Point3D(1,2,2);
+        Vector v = new Vector(2,2,2);
+        Ray r = new Ray(p3,v);
+        double rad = 3;
+        Tube t = new Tube(r,rad);
+        assert( t.getRadius() == rad);
+
     }
     /**
      * Test method for
