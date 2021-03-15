@@ -44,7 +44,9 @@ public class Sphere implements Geometry{
 
     @Override
     public Vector getNormal(Point3D point) {
-        return null;
+        //The radius is orthogonal to the point of tangency
+        //and therefore the normal is parallel to the radius
+        return point.subtract(center).normalize();
     }
 
     @Override

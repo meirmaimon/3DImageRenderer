@@ -9,6 +9,12 @@ import primitives.Vector;
  * returning the normal vector to a point
  */
 public interface Geometry {
+    /**
+     * This methods return the normal vector
+     * of the pount that on the geometry surface
+     * @param point point on the geometry
+     * @return the normal vector of the point
+     */
     Vector getNormal(Point3D point);
 
 }

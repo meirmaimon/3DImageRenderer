@@ -4,6 +4,7 @@ import primitives.Point3D;
 import primitives.Vector;
 
 import static org.junit.Assert.*;
+import static primitives.Util.isZero;
 
 /**
  * Testing Vector
@@ -151,38 +152,57 @@ public class VectorTest {
         // TC01: acute angle
         Vector v1 = new Vector(1,0,0);
         Vector v2 = new Vector(1,1,0);
-        assertEquals("Bad dot product",1,v2.dotProduct(v1));
+        assertTrue(isZero(v2.dotProduct(v1)-1));
 
         //TC02: obtuse angles
         Vector v3 = new Vector(-1,1,0);
-        assertEquals("Bad dot product",-1,v3.dotProduct(v1));
+        assertTrue(isZero(v3.dotProduct(v1)+1));
 
         // =============== Boundary Values Tests ==================
         //TC03:orthogonal vectors
         Vector v4 = new Vector(0,1,0);
-        assertEquals("Bad dot product",0,v4.dotProduct(v1));
+        assertTrue(isZero(v4.dotProduct(v1)-0));
 
         //TC05:straight angle
         Vector v5 = new Vector(-1,0,0);
-        assertEquals("Bad dot product",-1,v5.dotProduct(v1));
+        assertTrue(isZero(v5.dotProduct(v1)+1));
 
         //TC02:angle 0
         Vector v6 = new Vector(2,0,0);
-        assertEquals("Bad dot product",2,v6.dotProduct(v1));
+        assertTrue(isZero(v6.dotProduct(v1)-2));
     }
 
     @org.junit.Test
     public void crossProduct() {
     }
 
+    /**
+     * Test method for
+     * {@link Vector#lengthSquared()}
+     */
     @org.junit.Test
     public void lengthSquared() {
-    }
+        // ============ Equivalence Partitions Tests ==============
+        //TC01:simple test
+        Vector v1 = new Vector(1,2,3);
+        assertTrue(isZero(v1.lengthSquared() - 14));
 
+    }
+    /**
+     * Test method for
+     * {@link Vector#length()}
+     */
     @org.junit.Test
     public void length() {
+        // ============ Equivalence Partitions Tests ==============
+        //TC01:simple test
+        Vector v1 = new Vector(0,3,4);
+        assertTrue(isZero(v1.length()-5));
     }
-
+    /**
+     * Test method for
+     * {@link Vector#normalize()}
+     */
     @org.junit.Test
     public void normalize() {
     }
