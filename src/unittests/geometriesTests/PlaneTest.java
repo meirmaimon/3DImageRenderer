@@ -21,7 +21,7 @@ public class PlaneTest {
         Point3D p3= new Point3D(1,2,2);
         Vector v = new Vector(2,2,2);
         Plane p = new Plane(p3,v);
-        assertEquals("not the same point ", p.getQ0() , p3);
+        assertEquals("not the same point ",p3, p.getQ0());
     }
     /**
      * Test method for
@@ -34,7 +34,7 @@ public class PlaneTest {
         Point3D p3= new Point3D(1,2,2);
         Vector v = new Vector(2,2,2);
         Plane p = new Plane(p3,v);
-        assertEquals("not the same normal ", p.getNormal() , v);
+        assertEquals("not the same normal ", v , p.getNormal());
     }
 
     /**
@@ -48,7 +48,7 @@ public class PlaneTest {
         Point3D p3= new Point3D(1,2,2);
         Vector v = new Vector(2,2,2);
         Plane p = new Plane(p3,v);
-        assertEquals("not the same normal ", p.getNormal() , v);
+        assertEquals("not the same normal ", v , p.getNormal());
 
     }
 }

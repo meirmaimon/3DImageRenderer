@@ -264,7 +264,7 @@ public class VectorTest {
 
         // TC03: already normalize
         Vector v3 = new Vector(1/(Math.sqrt(3)),1/(Math.sqrt(3)),1/(Math.sqrt(3)));
-        assertEquals("cant normalize" , new Vector(1,1,1),v2.normalize());
+        assertEquals("cant normalize" , new Vector(1,1,1),v3.normalize());
 
         // =============== Boundary Values Tests ==================
     }

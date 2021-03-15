@@ -28,11 +28,11 @@ public class SphereTest {
      * {@link Sphere#getRadius()}
      */
     @Test
-    public void getRadius() {
+    public void testGetRadius() {
         // ============ Equivalence Partitions Tests ==============
         // TC01: simple test
         Sphere sp = new Sphere(new Point3D(1,1,1),1);
-        assertEquals("getRadius() wrong result",1,1);
+        assert(1==sp.getRadius());
     }
 
     /**

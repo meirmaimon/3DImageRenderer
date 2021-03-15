@@ -26,7 +26,7 @@ public class TubeTest {
         Ray r = new Ray(p3,v);
         double rad = 3;
         Tube t = new Tube(r,rad);
-        assertEquals("not the Axis Ray ", t.getAxisRay() , r);
+        assertEquals("not the Axis Ray ", r , t.getAxisRay());
 
     }
     /**
@@ -34,7 +34,7 @@ public class TubeTest {
      * {@link Tube#getRadius()}
      */
     @Test
-    public void getRadius() {
+    public void testGetRadius() {
         // ============ Equivalence Partitions Tests ==============
         // TC01
         Point3D p3= new Point3D(1,2,2);
@@ -50,10 +50,10 @@ public class TubeTest {
      * {@link Tube#getNormal(Point3D)}
      */
     @Test
-    public void getNormal() {
+    public void testGetNormal() {
         Tube tb = new Tube(new Ray(Point3D.ZERO,new Vector(1,0,0)),1);
         Point3D p = new Point3D(1,0,1);
-        Vector normal = new Vector(0,0,1);
+        Vector normal = tb.getNormal(p);
         assertEquals("Tube getNormal() wrong result",new Vector(0,0,1),normal);
     }
 }
