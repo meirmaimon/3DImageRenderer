@@ -27,11 +27,13 @@ public class Plane implements Geometry {
      * @param p1 point on the plane
      * @param p2 point on the plane
      * @param p3 point on the plane
+     * @throws IllegalArgumentException when the points are in the same line
      */
     public Plane(Point3D p1 ,Point3D p2 ,Point3D p3) {
         this.q0 = p1;
         Vector v1 = p2.subtract(p1);
         Vector v2 = p3.subtract(p1);
+        // if v1 and v2 are co-lined - cross-product will generate zero vector -> throwing exception
         this.normal = v1.crossProduct(v2).normalize();
     }
 

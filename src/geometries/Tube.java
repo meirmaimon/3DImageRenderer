@@ -1,8 +1,7 @@
 package geometries;
 
-import primitives.Point3D;
-import primitives.Ray;
-import primitives.Vector;
+import primitives.*;
+import static primitives.Util.*;
 
 /**
  * This class represents a Tube in the Cartesian
@@ -48,7 +47,7 @@ public class Tube implements Geometry {
         Vector opposite = axisRay.getDir();
         Vector hypotenuse = point.subtract(p0);
         double t = hypotenuse.dotProduct(opposite);
-        Point3D center = p0.add(opposite.scale(t));
+        Point3D center = isZero(t) ? p0 : p0.add(opposite.scale(t));
         return point.subtract(center);
     }
 

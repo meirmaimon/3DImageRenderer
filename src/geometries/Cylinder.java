@@ -1,8 +1,7 @@
 package geometries;
 
-import primitives.Point3D;
-import primitives.Ray;
-import primitives.Vector;
+import primitives.*;
+import static primitives.Util.*;
 
 /**
  * This class extends Tube
@@ -47,9 +46,13 @@ public class Cylinder extends Tube{
     public Vector getNormal(Point3D point) {
         Point3D p0 = axisRay.getP0();
         Vector opposite = axisRay.getDir();
+
+        if (p0.equals(point))
+            return opposite;
+
         Vector hypotenuse = point.subtract(p0);
         double t = hypotenuse.dotProduct(opposite);
-        if (t == height || t == 0)          // point is on the bases of the cylinder
+        if (isZero(t - height) || isZero(t))          // point is on the bases of the cylinder
             return opposite;                        // axisRay vector
 
         Point3D center = p0.add(opposite.scale(t));

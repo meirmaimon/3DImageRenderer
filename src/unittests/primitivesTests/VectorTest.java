@@ -10,7 +10,6 @@ import static primitives.Util.isZero;
  * Testing Vector
  */
 public class VectorTest {
-
     /**
      * Test method for
      * {@link primitives.Vector#add(Vector)}
@@ -54,9 +53,9 @@ public class VectorTest {
         // test zero vector from adding 2 opposite vectors
         Vector v10 = new Vector(-1,-1,-1);
         try {
-            Vector v11 = v10.add(v1);
+            v10.add(v1);
             fail("add() vector zero does not throw an exception");
-        } catch (Exception e){}
+        } catch (IllegalArgumentException ignored){}
     }
 
     /**
@@ -112,9 +111,9 @@ public class VectorTest {
         // =============== Boundary Values Tests ==================
         // test zero vector from subtract 2 identical vectors
         try {
-            Vector v11 = v1.subtract(v1);
+            v1.subtract(v1);
             fail("subtract identical vectors  does not throw an exception");
-        } catch (Exception e){}
+        } catch (IllegalArgumentException ignored){}
 
     }
 
@@ -137,9 +136,9 @@ public class VectorTest {
         // =============== Boundary Values Tests ==================
         // test zero
         try {
-            Vector v3 = v1.scale(0);
+            v1.scale(0);
             fail("scale with 0 does not throw an exception");
-        } catch (Exception e){}
+        } catch (IllegalArgumentException ignored){}
     }
 
     /**
@@ -152,7 +151,7 @@ public class VectorTest {
         // TC01: acute angle
         Vector v1 = new Vector(1,0,0);
         Vector v2 = new Vector(1,1,0);
-        assert(1==v2.dotProduct(v1));
+        assertEquals("...",1, v2.dotProduct(v1), 0.000001);
 
         //TC02: obtuse angles
         Vector v3 = new Vector(-1,1,0);
@@ -197,7 +196,7 @@ public class VectorTest {
         try {
             v1.crossProduct(v2);
             fail("crossProduct() for parallel vectors does not throw an exception");
-        } catch (Exception e) {}
+        } catch (IllegalArgumentException ignored) {}
     }
 
 
