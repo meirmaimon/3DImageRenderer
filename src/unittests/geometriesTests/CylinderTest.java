@@ -11,16 +11,6 @@ import static org.junit.Assert.*;
 public class CylinderTest {
     /**
      * Test for
-     * {@link Cylinder#getHeight()}
-     */
-    @Test
-    public void testGetHeight() {
-        Cylinder cy = new Cylinder(new Ray(Point3D.ZERO,new Vector(1,0,0)),1,2);
-        assert(2.0==cy.getHeight());
-    }
-
-    /**
-     * Test for
      * {@link geometries.Cylinder#getNormal(Point3D)}
      */
     @Test
@@ -58,5 +48,15 @@ public class CylinderTest {
         Point3D p7 = new Point3D(2,0,0);
         assertEquals("Cylinder getNormal() wrong result",new Vector(1,0,0),cy.getNormal(p7));
 
+    }
+    /**
+     * Test methods for
+     * {@link geometries.Cylinder#findIntersections(Ray)}
+     */
+    @Test
+    public void findIntersections() {
+        // ============ Equivalence Partitions Tests ==============
+        // TC01: simple test
+        fail("not implemented");
     }
 }

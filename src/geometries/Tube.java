@@ -1,6 +1,9 @@
 package geometries;
 
 import primitives.*;
+
+import java.util.List;
+
 import static primitives.Util.*;
 
 /**
@@ -57,5 +60,11 @@ public class Tube implements Geometry {
                 "axisRay=" + axisRay +
                 ", radius=" + radius +
                 '}';
+    }
+
+
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        return null;
     }
 }

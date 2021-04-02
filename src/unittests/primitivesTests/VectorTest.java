@@ -155,20 +155,20 @@ public class VectorTest {
 
         //TC02: obtuse angles
         Vector v3 = new Vector(-1,1,0);
-        assert(-1 == v3.dotProduct(v1));
+        assertEquals("dotProduct() wrong result",-1,v3.dotProduct(v1),0.00001);
 
         // =============== Boundary Values Tests ==================
         //TC03:orthogonal vectors
         Vector v4 = new Vector(0,1,0);
-        assert(0 == v4.dotProduct(v1));
+        assertEquals("dotProduct() wrong result",0, v4.dotProduct(v1),0.00001);
 
         //TC05:straight angle
         Vector v5 = new Vector(-1,0,0);
-        assert(-1 == v5.dotProduct(v1));
+        assertEquals("dotProduct() wrong result",-1, v5.dotProduct(v1),0.0001);
 
         //TC02:angle 0
         Vector v6 = new Vector(2,0,0);
-        assert(2 == v6.dotProduct(v1));
+        assertEquals("dotProduct() wrong result",2, v6.dotProduct(v1),0.00001);
     }
 
     /**
@@ -208,12 +208,12 @@ public class VectorTest {
         // TC01: positive
         Vector v1 = new Vector(1,2,1);
         double lengthSquared = v1.lengthSquared();
-        assert( 6 == lengthSquared);
+        assertEquals( "lengthSquares() wrong result",6 , lengthSquared,0.00001);
 
         // TC02: negative
         Vector v2 = new Vector(-1,-2,-1);
         double lengthSquared1 = v2.lengthSquared();
-        assert(6 == lengthSquared1);
+        assertEquals("lengthSquared() wrong result",6, lengthSquared1,0.00001);
 
         // =============== Boundary Values Tests ==================
     }
@@ -223,11 +223,11 @@ public class VectorTest {
         // ============ Equivalence Partitions Tests ==============
         // TC01: positive
         Vector v1 = new Vector(1,2,2);
-        assert( 3 == v1.length() );
+        assertEquals( "length() wrong result",3, v1.length(),0.000001 );
 
         // TC02: negative
         Vector v2 = new Vector(-1,-2,-2);
-        assert(3 == v2.length());
+        assertEquals("length() wrong result",3 ,v2.length(),0.00000001);
 
         // =============== Boundary Values Tests ==================
     }

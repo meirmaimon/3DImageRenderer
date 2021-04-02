@@ -44,6 +44,19 @@ public class Ray {
         return p0.equals(ray.p0) && dir.equals(ray.dir);
     }
 
+    /**
+     * This methods returns the point on the ray
+     * that is on the end of the direction vector
+     * after scaling
+     * @param t scalar
+     * @return the point at the end of the direction vector
+     * of the ray after being scaled
+     */
+    public Point3D getPoint(double t){
+        Vector v = dir.scale(t);
+        return p0.add(v);
+    }
+
 
     @Override
     public String toString() {

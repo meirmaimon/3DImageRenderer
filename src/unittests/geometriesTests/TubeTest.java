@@ -15,40 +15,6 @@ import static org.junit.Assert.*;
 public class TubeTest {
     /**
      * Test method for
-     * {@link Tube#getAxisRay()}
-     */
-    @Test
-    public void getAxisRay() {
-        // ============ Equivalence Partitions Tests ==============
-        // TC01
-        Point3D p3= new Point3D(1,2,2);
-        Vector v = new Vector(2,2,2);
-        Ray r = new Ray(p3,v);
-        double rad = 3;
-        Tube t = new Tube(r,rad);
-        assertEquals("not the Axis Ray ", r , t.getAxisRay());
-
-    }
-
-    /**
-     * Test method for
-     * {@link Tube#getRadius()}
-     */
-    @Test
-    public void testGetRadius() {
-        // ============ Equivalence Partitions Tests ==============
-        // TC01
-        Point3D p3= new Point3D(1,2,2);
-        Vector v = new Vector(2,2,2);
-        Ray r = new Ray(p3,v);
-        double rad = 3;
-        Tube t = new Tube(r,rad);
-        assert( t.getRadius() == rad);
-
-    }
-
-    /**
-     * Test method for
      * {@link Tube#getNormal(Point3D)}
      */
     @Test
@@ -63,5 +29,15 @@ public class TubeTest {
         // TC02 Point against axis head
         Vector normal2 = tb.getNormal(new Point3D(0,0,1));
         assertEquals("Tube getNormal() wrong result",new Vector(0,0,1),normal2);
+    }
+    /**
+     * Test methods for
+     * {@link geometries.Tube#findIntersections(Ray)}
+     */
+    @Test
+    public void testFindIntersections() {
+        // ============ Equivalence Partitions Tests ==============
+        // TC01: simple test
+        fail("not implemented");
     }
 }

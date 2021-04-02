@@ -1,7 +1,10 @@
 package geometries;
 
 import primitives.Point3D;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.List;
 
 /**
  * This class represents a Plane in the 3D cartesian
@@ -64,5 +67,10 @@ public class Plane implements Geometry {
                 "q0=" + q0 +
                 ", normal=" + normal +
                 '}';
+    }
+
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        return null;
     }
 }

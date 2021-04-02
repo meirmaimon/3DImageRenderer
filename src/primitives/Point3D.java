@@ -5,9 +5,9 @@ import java.util.Objects;
  * coordinate system.
  */
 public class Point3D {
-    final Coordinate x;
-    final Coordinate y;
-    final Coordinate z;
+    public final Coordinate x;
+    public final Coordinate y;
+    public final Coordinate z;
     /**
      * Point zero represents the point of the origin
      */
@@ -102,6 +102,14 @@ public class Point3D {
                 ", y=" + y +
                 ", z=" + z +
                 '}';
+    }
+
+    /**
+     * This method return the value of the x coordinate
+     * @return  the value of the x coordinate
+     */
+    public double getX() {
+        return x.coord;
     }
 }
 

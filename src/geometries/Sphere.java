@@ -1,7 +1,12 @@
 package geometries;
 
 import primitives.Point3D;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.*;
+
+import static primitives.Util.isZero;
 
 /**
  * This class represents a Sphere
@@ -56,4 +61,38 @@ public class Sphere implements Geometry{
                 ", radius=" + radius +
                 '}';
     }
+
+    @Override
+    public List<Point3D> findIntersections(Ray ray) {
+        Vector v = ray.getDir();
+        Vector u = null;
+        try {
+            u = center.subtract(ray.getP0());
+        } catch (Exception e) {                 //ray start in the center of the sphere
+            Vector r = v.scale(radius);
+            Point3D p1 = center.add(r);
+            List<Point3D> intersections = new LinkedList<Point3D>();
+            return intersections;               // only 1 intersection point in this case
+        }
+        double tm = v.dotProduct(u);
+        double d = Math.sqrt(u.lengthSquared() - (tm*tm));
+        if(d >= radius)             //there is no intersection points
+            return null;
+        List<Point3D> intersections = new LinkedList<Point3D>();
+        double th = Math.sqrt((radius*radius) - (d*d));
+        double t1 = tm + th;
+        Point3D p1 = ray.getPoint(t1);
+        if(isZero(tm)) {                  //ray orthogonal tho the radius and ray is inside the sphere (d<r)
+            intersections.add(p1);
+            return intersections;
+        }
+        double t2 = tm - th;
+        Point3D p2 = ray.getPoint(t2);
+        intersections.add(p2);
+        return intersections;
+
+
+    }
+
+
 }

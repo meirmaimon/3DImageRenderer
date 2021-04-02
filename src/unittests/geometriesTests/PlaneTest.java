@@ -10,32 +10,6 @@ import static org.junit.Assert.*;
  * Testing plane
  */
 public class PlaneTest {
-    /**
-     * Test method for
-     * {@link Plane#getQ0()}
-     */
-    @Test
-    public void testGetQ0() {
-        // ============ Equivalence Partitions Tests ==============
-        // TC01
-        Point3D p3= new Point3D(1,2,2);
-        Vector v = new Vector(2,2,2);
-        Plane p = new Plane(p3,v);
-        assertEquals("not the same point ",p3, p.getQ0());
-    }
-    /**
-     * Test method for
-     * {@link Plane#getNormal()} ()}
-     */
-    @Test
-    public void testGetNormal() {
-        // ============ Equivalence Partitions Tests ==============
-        // TC01
-        Point3D p3= new Point3D(1,2,2);
-        Vector v = new Vector(2,2,2);
-        Plane p = new Plane(p3,v);
-        assertEquals("not the same normal ", v , p.getNormal());
-    }
 
     /**
      * Test method for 

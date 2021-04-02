@@ -8,7 +8,7 @@ import primitives.Vector;
  * to implement
  * returning the normal vector to a point
  */
-public interface Geometry {
+public interface Geometry extends Intersectable {
     /**
      * This methods return the normal vector
      * of the point that on the geometry surface
