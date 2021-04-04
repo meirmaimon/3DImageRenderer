@@ -6,6 +6,7 @@ import primitives.Vector;
 
 import java.util.*;
 
+import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
 /**
@@ -72,23 +73,54 @@ public class Sphere implements Geometry{
             Vector r = v.scale(radius);
             Point3D p1 = center.add(r);
             List<Point3D> intersections = new LinkedList<Point3D>();
+            intersections.add(p1);
             return intersections;               // only 1 intersection point in this case
         }
+        double uLength = u.length();
         double tm = v.dotProduct(u);
-        double d = Math.sqrt(u.lengthSquared() - (tm*tm));
-        if(d >= radius)             //there is no intersection points
+        double d = Math.sqrt(u.lengthSquared() - (tm * tm));
+        if (d >= radius)             //there is no intersection points
             return null;
-        List<Point3D> intersections = new LinkedList<Point3D>();
-        double th = Math.sqrt((radius*radius) - (d*d));
+        if ( alignZero(uLength - radius) >= 0)      // ray is outside/on the sphere
+            if (alignZero(tm) <= 0)          // ray direction isn't toward the sphere or tangent
+                return null;     //no intersections
+        double th = Math.sqrt((radius * radius) - (d * d));
         double t1 = tm + th;
         Point3D p1 = ray.getPoint(t1);
+        List<Point3D> intersections = new LinkedList<Point3D>();
+        if (isZero(uLength-radius)) {     // ray start on the sphere
+            // ray direction isn't toward the sphere or tangent
+            if (alignZero(tm) <= 0) return null;
+            else {          //ray direction towards the sphere
+                intersections.add(p1);
+                return intersections;
+            }
+        }
+        if (alignZero(uLength - radius) > 0) {            //ray starts outside the sphere and towards the sphere
+            double t2 = tm - th;
+            Point3D p2 = ray.getPoint(t2);
+            intersections.add(p2);
+            intersections.add(p1);
+            return intersections;
+        }
+        if (alignZero(uLength - radius) < 0) {            //ray starts inside the sphere
+            intersections.add(p1);
+            return intersections;
+        }
+
+
+
+
+
+
+
+
+
         if(isZero(tm)) {                  //ray orthogonal tho the radius and ray is inside the sphere (d<r)
             intersections.add(p1);
             return intersections;
         }
-        double t2 = tm - th;
-        Point3D p2 = ray.getPoint(t2);
-        intersections.add(p2);
+
         return intersections;
 
 
