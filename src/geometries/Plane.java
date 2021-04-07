@@ -4,7 +4,11 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.awt.*;
+import java.util.LinkedList;
 import java.util.List;
+
+import static primitives.Util.*;
 
 /**
  * This class represents a Plane in the 3D cartesian
@@ -71,6 +75,37 @@ public class Plane implements Geometry {
 
     @Override
     public List<Point3D> findIntersections(Ray ray) {
-        return null;
+        Vector v = ray.getDir();
+        Point3D p0 = ray.getP0();
+
+        double nv = normal.dotProduct(v);
+        if (isZero(nv)) {
+            // no solution - the Ray is parallel to the plane
+            return null;
+        }
+        double t;
+        if (p0.equals((q0))) {
+            // the subtract will create the zero vector and will fail
+            // in this case the points are equal so they are the intersection
+            // assumption: if the Ray included in the Plane, return only the first point
+            t = 0;
+        }
+        else {
+            double nQMinusP0 = (q0.subtract(p0)).dotProduct(normal);
+            t = alignZero(nQMinusP0 / nv);
+        }
+
+        if (t == 0) {
+            // endless solutions - the plane include the ray
+            List<Point3D> intersections = new LinkedList<Point3D>();
+            intersections.add(p0);
+            return intersections;
+        }
+        if (t > 0) {
+            List<Point3D> intersections = new LinkedList<Point3D>();
+            intersections.add(ray.getPoint(t));
+            return intersections;
+        }
+        return null; // TODO when t is negative
     }
 }
