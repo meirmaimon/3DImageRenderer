@@ -53,6 +53,9 @@ public class SphereTest {
         assertEquals("Ray crosses sphere", List.of(p1, p2), result);
 
         // TC03: Ray starts inside the sphere (1 point)
+        Point3D p3 = new Point3D(1.559166305,0.759166304,0.759166304);
+        result = sphere.findIntersections(new Ray(new Point3D(0.8,0.2,0.2) , new Vector(1,1,1)))
+
 
         // TC04: Ray starts after the sphere (0 points)
 
