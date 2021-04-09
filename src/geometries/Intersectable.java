@@ -12,7 +12,7 @@ import java.util.List;
 public interface Intersectable {
     /**
      * This method return a list of all the intersection
-     * betweeen given ray and geometry
+     * between given ray and geometry
      * @param ray Ray that intersect
      * @return the intersection point
      */

@@ -33,7 +33,7 @@ public class SphereTest {
      * {@link geometries.Sphere#findIntersections(Ray)}
      */
     @Test
-    public void findIntersections() {
+    public void testFindIntersections() {
         Sphere sphere = new Sphere(new Point3D(1, 0, 0), 1d);
 
         // ============ Equivalence Partitions Tests ==============
