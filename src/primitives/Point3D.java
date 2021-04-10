@@ -111,6 +111,20 @@ public class Point3D {
     public double getX() {
         return x.coord;
     }
+    /**
+     * This method return the value of the x coordinate
+     * @return  the value of the y coordinate
+     */
+    public double getY() {
+        return y.coord;
+    }
+    /**
+     * This method return the value of the x coordinate
+     * @return  the value of the z coordinate
+     */
+    public double getZ() {
+        return z.coord;
+    }
 }
 
 

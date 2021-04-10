@@ -43,7 +43,7 @@ public class Triangle extends Polygon{
             try {
                 Vector v_i = p_i.subtract(p0);
                 Vector v_i1 = p_i1.subtract(p0);
-                n_i = v_i.crossProduct(v_i1);
+                n_i = v_i.crossProduct(v_i1).normalized();
             } catch (Exception e) {             //Vector Zero
                 return null;
             }

@@ -32,15 +32,21 @@ public class TriangleTest {
         assertEquals("Triangle findIntersections() bad result", null ,
                 tr.findIntersections(new Ray(new Point3D(1.5,-0.5,1),new Vector(0,0,-1))));
         // TC03: Point is inside the triangle (1 points)
-        Point3D p1 = new Point3D(0.5,0.5,0);
+        Point3D p1 = new Point3D(0.25,0.25,0);
         assertEquals("Triangle findIntersections() bad result", List.of(p1),
-                tr.findIntersections(new Ray(new Point3D(0.5,0.5,1),new Vector(0,0,-1))));
+                tr.findIntersections(new Ray(new Point3D(0.25,0.25,1),new Vector(0,0,-1))));
 
 
         // =============== Boundary Values Tests ==================
         // TC04: Point is on the edge of the triangle (0 points)
+        assertEquals("Triangle findIntersections() bad result", null,
+                tr.findIntersections(new Ray(new Point3D(0.5,0.5,1),new Vector(0,0,-1))));
         // TC05: Point is on the vertex of the triangle (0 points)
+        assertEquals("Triangle findIntersections() bad result", null,
+                tr.findIntersections(new Ray(new Point3D(1,0,1),new Vector(0,0,-1))));
         // TC04: Point is on edge's continuation (0 points)
+        assertEquals("Triangle findIntersections() bad result", null,
+                tr.findIntersections(new Ray(new Point3D(2,0,1),new Vector(0,0,-1))));
 
 
     }
