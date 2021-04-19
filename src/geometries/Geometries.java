@@ -11,7 +11,7 @@ public class Geometries implements Intersectable{
     private List<Intersectable> intersectables;
     /**
      * Default Ctor
-     * Cretes an empty list
+     * Creates an empty list
      */
     public Geometries() {
         this.intersectables = new LinkedList<Intersectable>();

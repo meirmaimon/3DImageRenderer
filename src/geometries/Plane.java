@@ -73,6 +73,10 @@ public class Plane implements Geometry {
                 '}';
     }
 
+    /**
+     * return list of intersection points between the plane and the ray
+     * @param ray instance of Ray to check the intersection
+     */
     @Override
     public List<Point3D> findIntersections(Ray ray) {
         Vector v = ray.getDir();
