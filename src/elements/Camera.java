@@ -16,13 +16,14 @@ public class Camera {
     public Camera(Point3D p0, Vector vUp, Vector vTo) throws Exception {
         // check if vUp and vTo are orthogonal:
         if (!isZero(vUp.dotProduct(vTo))) {
-            throw new Exception("The vectors vUp and vTo are not orthogonal in this camera");
+            throw new IllegalArgumentException("The vectors vUp and vTo are not orthogonal in this camera");
             // TODO check if create special exception
         }
         // normalize the vectors:
         this.p0 = p0;
         this.vUp = vUp.normalized();
         this.vTo = vTo.normalized();
+        this.vRight = vTo.crossProduct(vUp)
     }
 
     public Point3D getP0() {
