@@ -19,7 +19,7 @@ public class Camera {
             throw new IllegalArgumentException("The vectors vUp and vTo are not orthogonal in this camera");
             // TODO check if create special exception
         }
-        // normalize the vectors:
+        // normalize the vectors::
         this.p0 = p0;
         this.vUp = vUp.normalized();
         this.vTo = vTo.normalized();
