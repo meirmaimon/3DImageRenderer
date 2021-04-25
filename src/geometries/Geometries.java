@@ -8,23 +8,19 @@ import java.util.List;
 
 public class Geometries implements Intersectable{
 
-    private List<Intersectable> intersectables;
+    private List<Intersectable> intersectables = new LinkedList<Intersectable>();
     /**
      * Default Ctor
      * Creates an empty list
      */
-    public Geometries() {
-        this.intersectables = new LinkedList<Intersectable>();
-    }
+    public Geometries() { }
 
     /**
      * Create a list with all the given geometries
      * @param geometries given geometries
      */
     public Geometries(Intersectable... geometries){
-        intersectables = new LinkedList<>();
-        for (Intersectable geometry: geometries)
-            intersectables.add(geometry);
+        add(geometries);
     }
 
     /**
@@ -38,14 +34,14 @@ public class Geometries implements Intersectable{
 
     @Override
     public List<Point3D> findIntersections(Ray ray) {
-        if (intersectables.isEmpty()) return null;      //there no geometry to intersect with
-        List<Point3D> intersections_points = new LinkedList<>();
+        List<Point3D> intersectionsPoints = null;
         for (Intersectable geometry:intersectables) {
             List<Point3D> intersection = geometry.findIntersections(ray);
             if (intersection == null) continue;             // There were no intersection points
-            intersections_points.addAll(intersection);
+            if (intersectionsPoints == null)
+                intersectionsPoints = new LinkedList<>();
+            intersectionsPoints.addAll(intersection);
         }
-        if (intersections_points.isEmpty()) return null;
-        return intersections_points;
+        return intersectionsPoints;
     }
 }
