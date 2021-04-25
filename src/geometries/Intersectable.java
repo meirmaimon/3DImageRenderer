@@ -1,8 +1,6 @@
 package geometries;
-
 import primitives.*;
 import java.util.List;
-
 
 /**
  * This interface for basic geometries to implement

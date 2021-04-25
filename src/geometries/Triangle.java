@@ -1,18 +1,14 @@
 package geometries;
-
 import primitives.*;
 import java.util.LinkedList;
 import java.util.List;
-
 import static primitives.Util.isZero;
-
 
 /**
  * This class represents a triangle
  * in the cartesian coordinate system
  */
 public class Triangle extends Polygon{
-
     /**
      * Creates an Triangle given 3 points
      * @param p1 vertices 1

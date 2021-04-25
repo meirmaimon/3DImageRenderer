@@ -1,8 +1,6 @@
 package unittests.primitivesTests;
-
 import primitives.Point3D;
 import primitives.Vector;
-
 import static org.junit.Assert.*;
 import static primitives.Util.isZero;
 
@@ -10,6 +8,7 @@ import static primitives.Util.isZero;
  * Testing Vector
  */
 public class VectorTest {
+
     /**
      * Test method for
      * {@link primitives.Vector#add(Vector)}
@@ -24,7 +23,6 @@ public class VectorTest {
         assertEquals("Bad vector addition",new Vector(2,3,4),v3);
 
         //TC02: vectors with different sign
-
         Vector v4 = new Vector(-1,1,1);
         v3 = v4.add(v2);
         assertEquals("Bad vector addition",new Vector(0,3,4),v3);
@@ -83,7 +81,6 @@ public class VectorTest {
         assertEquals("Bad vector subtraction",new Vector(0,-1,-2),v3);
 
         //TC02: vectors with different sign
-
         Vector v4 = new Vector(-1,1,1);
         v3 = v4.subtract(v2);
         assertEquals("Bad vector subtraction",new Vector(-2,-1,-2),v3);
@@ -114,7 +111,6 @@ public class VectorTest {
             v1.subtract(v1);
             fail("subtract identical vectors  does not throw an exception");
         } catch (IllegalArgumentException ignored){}
-
     }
 
     /**
@@ -199,9 +195,6 @@ public class VectorTest {
         } catch (IllegalArgumentException ignored) {}
     }
 
-
-
-
     @org.junit.Test
     public void testLengthSquared() {
         // ============ Equivalence Partitions Tests ==============
@@ -214,8 +207,6 @@ public class VectorTest {
         Vector v2 = new Vector(-1,-2,-1);
         double lengthSquared1 = v2.lengthSquared();
         assertEquals("lengthSquared() wrong result",6, lengthSquared1,0.00001);
-
-        // =============== Boundary Values Tests ==================
     }
 
     @org.junit.Test
@@ -228,8 +219,6 @@ public class VectorTest {
         // TC02: negative
         Vector v2 = new Vector(-1,-2,-2);
         assertEquals("length() wrong result",3 ,v2.length(),0.00000001);
-
-        // =============== Boundary Values Tests ==================
     }
 
     @org.junit.Test
@@ -246,8 +235,6 @@ public class VectorTest {
         // TC03: already normalize
         Vector v3 = new Vector((double)1/(Math.sqrt(3)),(double)1/(Math.sqrt(3)),(double)1/(Math.sqrt(3)));
         assertEquals("cant normalized" , v3 ,v3.normalize());
-
-        // =============== Boundary Values Tests ==================
     }
 
     @org.junit.Test
@@ -264,7 +251,5 @@ public class VectorTest {
         // TC03: already normalize
         Vector v3 = new Vector((double)1/(Math.sqrt(3)),(double)1/(Math.sqrt(3)),(double)1/(Math.sqrt(3)));
         assertEquals("cant normalized" , v3 ,v3.normalize());
-
-        // =============== Boundary Values Tests ==================
     }
 }

@@ -1,11 +1,6 @@
-/**
- * 
- */
 package unittests.geometriesTests;
-
 import static org.junit.Assert.*;
 import org.junit.Test;
-
 import geometries.*;
 import primitives.*;
 
@@ -76,7 +71,6 @@ public class PolygonTests {
                     new Point3D(0, 1, 0), new Point3D(0, 1, 0));
             fail("Constructed a polygon with vertice on a side");
         } catch (IllegalArgumentException e) {}
-
     }
 
     /**
@@ -101,5 +95,4 @@ public class PolygonTests {
         // TC01: simple test
         fail("not implemented");
     }
-
 }

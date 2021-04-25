@@ -1,14 +1,12 @@
 package geometries;
 import primitives.*;
-
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Geometries implements Intersectable{
-
     private List<Intersectable> intersectables;
+
     /**
      * Default Ctor
      * Creates an empty list

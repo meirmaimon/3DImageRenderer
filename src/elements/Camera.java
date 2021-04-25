@@ -1,13 +1,10 @@
 package elements;
-
 import primitives.Point3D;
 import primitives.Vector;
-
 import static org.junit.Assert.assertTrue;
 import static primitives.Util.isZero;
 
 public class Camera {
-
     private Point3D p0;
     private Vector vUp;
     private Vector vTo;
@@ -22,7 +19,6 @@ public class Camera {
             throw new Exception("The vectors vUp and vTo are not orthogonal in this camera");
             // TODO check if create special exception
         }
-
         // normalize the vectors:
         this.p0 = p0;
         this.vUp = vUp.normalized();
@@ -56,6 +52,4 @@ public class Camera {
     public double getDistance() {
         return distance;
     }
-
-
 }
