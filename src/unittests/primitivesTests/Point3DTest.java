@@ -1,14 +1,13 @@
 package unittests.primitivesTests;
-
 import org.junit.Test;
 import primitives.Vector;
-
 import static org.junit.Assert.*;
 
 /**
  * Test Point 3D
  */
 public class Point3DTest {
+
     /**
      * Test method for
      * {@link primitives.Point3D#add(Vector)}

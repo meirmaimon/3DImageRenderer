@@ -1,17 +1,13 @@
 package geometries;
-
 import primitives.*;
 import static primitives.Util.*;
-
 /**
  * This class extends Tube
  * Represents a Cylinder in the Cartesian
  * Coordinate system
  */
 public class Cylinder extends Tube{
-
     private double height;
-
     /**
      * Creates a Cylinder with given height radius and a ray
      * @param axisRay Cylinder's axis ray
@@ -24,7 +20,6 @@ public class Cylinder extends Tube{
             throw new IllegalArgumentException("Height must be positive");
         this.height = height;
     }
-
     /**
      * This methods returns the height of the cylinder
      * @return Cylinder's height

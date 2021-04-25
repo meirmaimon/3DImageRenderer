@@ -8,6 +8,7 @@ public class Point3D {
     public final Coordinate x;
     public final Coordinate y;
     public final Coordinate z;
+
     /**
      * Point zero represents the point of the origin
      */
@@ -111,6 +112,7 @@ public class Point3D {
     public double getX() {
         return x.coord;
     }
+
     /**
      * This method return the value of the x coordinate
      * @return  the value of the y coordinate
@@ -118,6 +120,7 @@ public class Point3D {
     public double getY() {
         return y.coord;
     }
+
     /**
      * This method return the value of the x coordinate
      * @return  the value of the z coordinate

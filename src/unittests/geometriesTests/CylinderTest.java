@@ -1,5 +1,4 @@
 package unittests.geometriesTests;
-
 import geometries.Cylinder;
 import org.junit.Test;
 import primitives.Point3D;
@@ -9,6 +8,7 @@ import primitives.Vector;
 import static org.junit.Assert.*;
 
 public class CylinderTest {
+
     /**
      * Test for
      * {@link geometries.Cylinder#getNormal(Point3D)}
@@ -47,8 +47,8 @@ public class CylinderTest {
         //TC07:Point is in the center of lower base
         Point3D p7 = new Point3D(2,0,0);
         assertEquals("Cylinder getNormal() wrong result",new Vector(1,0,0),cy.getNormal(p7));
-
     }
+    
     /**
      * Test methods for
      * {@link geometries.Cylinder#findIntersections(Ray)}
