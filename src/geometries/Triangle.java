@@ -47,7 +47,7 @@ public class Triangle extends Polygon{
         }
         catch (Exception e){
             return null;
-        }           //Vector 0
+        }           
 
     }
 }
