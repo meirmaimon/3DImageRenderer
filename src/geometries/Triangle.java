@@ -25,35 +25,30 @@ public class Triangle extends Polygon{
         if (p == null) {
             return null;
         }
-        //checking if the p is inside the triangle
-        int size = vertices.size();
-       // List<Vector> vectors = new LinkedList<Vector>();
-        Point3D p0 = ray.getP0();       //ray start point
-        Vector v = ray.getDir();
-        double sign = 0;                //sign of the cross product between the normal and the ray direction
+        Point3D p0 = ray.getP0();
+        Vector v =  ray.getDir();
+        Vector v1 = vertices.get(0).subtract(p0);
+        Vector v2 = vertices.get(1).subtract(p0);
+        Vector v3 = vertices.get(2).subtract(p0);
+        try {
+            Vector n1 = v1.crossProduct(v2);
+            n1.normalize();
+            Vector n2 = v2.crossProduct(v3);
+            n2.normalize();
+            Vector n3 = v3.crossProduct(v1);
+            n3.normalize();
+            double sign1 =  v.dotProduct(n1);
+            double sign2 =  v.dotProduct(n2);
+            double sign3 =  v.dotProduct(n3);
+            if (sign1 * sign2 <=  0 || sign1 * sign3 <= 0)
+                return null;                            //point outside the triangle
+            return p;
 
-        for (int i = 0; i < size; i++) {
-            Point3D p_i = vertices.get(i);
-            Point3D p_i1 = vertices.get((i + 1) % size); //last vector cross product with the first vector
-            Vector n_i = null;
-            try {
-                Vector v_i = p_i.subtract(p0);
-                Vector v_i1 = p_i1.subtract(p0);
-                n_i = v_i.crossProduct(v_i1);
-                n_i = n_i.normalize();
-            } catch (Exception e) {             //Vector Zero
-                return null;
-            }
-            double checkDotProduct = v.dotProduct(n_i);
-            if (isZero(checkDotProduct))
-                return null;
-            if (i == 0) {         // first iteration
-                sign = checkDotProduct / Math.abs(checkDotProduct);
-            }
-            if (sign * checkDotProduct < 0)       // not the same sign
-                return null;
         }
-        return p;
+        catch (Exception e){
+            return null;
+        }           //Vector 0
+
     }
 }
 
