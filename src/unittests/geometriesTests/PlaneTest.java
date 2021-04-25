@@ -46,10 +46,9 @@ public class PlaneTest {
         // =============== Boundary Values Tests ==================
 
         // **** Group: Ray is parallel to the plane
-        // TC11: Ray is included in the plane (endless points)
+        // TC11: Ray is included in the plane (there is no intersection)
         List<Point3D> result11 = plane.findIntersections(new Ray(new Point3D(1, 0, 0), new Vector(1, 0, 0)));
-        assertEquals("Ray is included in the plane - Wrong number of points", 1, result11.size());
-        assertEquals("Ray is included in the plane", List.of(new Point3D(1, 0, 0)), result11);
+        assertEquals("Ray is included in the plane - Wrong number of points", null, result11);
 
         // TC12: Ray does not included in the plane (0 points)
         assertEquals("Ray does not included in the plane", null,
@@ -63,8 +62,7 @@ public class PlaneTest {
 
         // TC14: Ray starts at the plane (1 points)
         List<Point3D> result14 = plane.findIntersections(new Ray(new Point3D(1 , 0, 0), new Vector(1, 0, 0)));
-        assertEquals("Ray starts at the plane - Wrong number of points", 1, result14.size());
-        assertEquals("Ray starts at the plane", List.of(new Point3D(1, 0, 0)), result14);
+        assertEquals("Ray starts at the plane - Wrong number of points", null, result14);
 
         // TC15: Ray starts after the plane (0 points)
         assertEquals(" Ray starts at the plane", null,
@@ -73,13 +71,10 @@ public class PlaneTest {
         // **** Group: Ray is neither orthogonal nor parallel to the plane
         // TC16: Ray begins at the plane (𝑃0 is in the plane, but not the ray)
         List<Point3D> result16 = plane.findIntersections(new Ray(new Point3D(1 , 1, 1), new Vector(6, 1, 1)));
-        assertEquals("Ray begins at the plane - Wrong number of points", 1, result16.size());
-        assertEquals("Ray begins at the plane", List.of(new Point3D(1, 1, 1)), result16);
+        assertEquals("Ray begins at the plane - Wrong number of points", null, result16);
 
         // TC17: Ray begins in the same point which appears as reference point in the plane (Q)
         List<Point3D> result17 = plane.findIntersections(new Ray(new Point3D(1 , 0, 0), new Vector(6, 1, 1)));
-        assertEquals("Ray begins in the same point which appears as reference point in the plane - Wrong number of points", 1, result17.size());
-        assertEquals("Ray begins in the same point which appears as reference point in the plane", List.of(new Point3D(1, 0, 0)), result17);
+        assertEquals("Ray begins in the same point which appears as reference point in the plane - Wrong number of points", null, result17);
     }
-
 }
