@@ -26,27 +26,39 @@ public class integrationTests {
      * @param nY view plan y's pixels
      * @return number of pixels that their ray intersect with the geometry
      */
-    public int countIntersection(Camera cam , Geometry geometry ,int nX,int nY) {
+    public int countIntersection(Camera cam , Geometry geometry ,int nX, int nY) {
         int count = 0;
         List<Point3D> points;
-            for (int i = 0; i < nX; i++){
-                for (int j = 0; j < nY; j++) {
-                    points = geometry.findIntersections(cam.constructRayThroughPixel(nX, nY, i, j));
-                    if (points != null) {
-                        count += points.size();
-                    }
+        for (int i = 0; i < nX; i++){
+            for (int j = 0; j < nY; j++) {
+                points = geometry.findIntersections(cam.constructRayThroughPixel(nX, nY, i, j));
+                if (points != null) {
+                    count += points.size();
                 }
+            }
         }
         return count;
     }
 
     @Test
     public void testSphereIntersections() {
-        Camera camera = new Camera(Point3D.ZERO, new Vector(0, 1, 0), new Vector(0, 0, -1));
+        Camera camera = new Camera(Point3D.ZERO, new Vector(0, 0, -1), new Vector(0, 1, 0));
+        camera.setViewPlaneSize(3,3).setDistance(1d);
         Sphere sphere = new Sphere(new Point3D(0,0,-3),1);
-      // TODO methode for the find intersections
-        int intersections = 0;
-        intersections += sphere.findIntersections(camera.constructRayThroughPixel(3,3,0,0)).size();
+        //TC01 Sphere r=1, 2 intersection points
+        assertEquals("wrong number of points" ,2 , countIntersection(camera, sphere,3,3));
+        Camera camera1 = new Camera(new Point3D(0,0,0.5), new Vector(0, 0, -1), new Vector(0, 1, 0));
+        camera1.setViewPlaneSize(3,3).setDistance(1d);
+        Sphere sphere1 = new Sphere(new Point3D(0,0,-2.5),2.5);
+        //TC02 Sphere r=2.5, 18 intersection points
+        assertEquals("wrong number of points" ,18 , countIntersection(camera1, sphere1,3,3));
+        Sphere sphere2 = new Sphere(new Point3D(0,0,-2),2);
+        //TC03 Sphere r=2, 10 intersection points
+        assertEquals("wrong number of points" ,10 , countIntersection(camera1, sphere2,3,3));
+        Sphere sphere3 = new Sphere(new Point3D(0,0,0),4);
+        //TC04 Sphere r=4, 9 intersection points
+        assertEquals("wrong number of points" ,9 , countIntersection(camera1, sphere3,3,3));
+
     }
 
     @Test
