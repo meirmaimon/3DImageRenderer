@@ -37,4 +37,26 @@ public class Point3DTest {
         // TC02: Distance from itself
         assertEquals("Wrong point" ,0,p.distance(new Point3D(0,1,0)),0.00000000001 );
     }
+
+    /**
+     * Test methods for {@link primitives.Point3D#subtract(Point3D)}
+     */
+    @Test
+    public void subtract() {
+        // ============ Equivalence Partitions Tests ==============
+        // TC01: There is a simple single test here
+        Point3D p = new Point3D(2,0,0);
+        assertEquals("wrong vector ", new Vector(1,0,0), p.subtract(new Point3D(1,0,0)));
+        // =============== Boundary Values Tests ==================
+        // TC02: subtract from itself
+        try {
+            p.subtract(p);
+            fail("point not throw exception with vector 0");
+        }
+        catch (IllegalArgumentException e) {}
+
+        // TC03: subtract ZERO
+        assertEquals("wrong vector ", new Vector(2,0,0), p.subtract(Point3D.ZERO));
+    }
+
 }
