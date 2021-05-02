@@ -81,11 +81,11 @@ public class Sphere implements Geometry {
         if (alignZero(uSquared - radiusSquared) >= 0 && tm <= 0)
             return null;
 
-        double dSquared = uSquared - (tm * tm);
-        if (alignZero(dSquared - radiusSquared) >= 0)             //there is no intersection points
+        double radiusMinusDSquared = radiusSquared - (uSquared - (tm * tm));
+        if (alignZero(radiusMinusDSquared) <= 0)             //there is no intersection points
             return null;
 
-        double th = Math.sqrt(radiusSquared - dSquared);
+        double th = Math.sqrt(radiusMinusDSquared);
         double t1 = alignZero(tm + th);
         double t2 = alignZero(tm - th);
         List<Point3D> intersections = new LinkedList<Point3D>();

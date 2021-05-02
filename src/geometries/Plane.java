@@ -1,10 +1,13 @@
 package geometries;
+
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
+
 import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
+
 import static primitives.Util.*;
 
 /**
@@ -18,7 +21,8 @@ public class Plane implements Geometry {
 
     /**
      * Creats a plane given point and normal
-     * @param q0 point on the plane
+     *
+     * @param q0     point on the plane
      * @param normal vector normal to the plane
      */
     public Plane(Point3D q0, Vector normal) {
@@ -28,12 +32,13 @@ public class Plane implements Geometry {
 
     /**
      * Creates a plane given three points
+     *
      * @param p1 point on the plane
      * @param p2 point on the plane
      * @param p3 point on the plane
      * @throws IllegalArgumentException when the points are in the same line
      */
-    public Plane(Point3D p1 ,Point3D p2 ,Point3D p3) {
+    public Plane(Point3D p1, Point3D p2, Point3D p3) {
         this.q0 = p1;
         Vector v1 = p2.subtract(p1);
         Vector v2 = p3.subtract(p1);
@@ -43,6 +48,7 @@ public class Plane implements Geometry {
 
     /**
      * Gets the plane's point
+     *
      * @return the plane's point
      */
     public Point3D getQ0() {
@@ -51,6 +57,7 @@ public class Plane implements Geometry {
 
     /**
      * gets the normal vector of the plane
+     *
      * @return plane's normal vector
      */
     public Vector getNormal() {
@@ -72,6 +79,7 @@ public class Plane implements Geometry {
 
     /**
      * return list of intersection points between the plane and the ray
+     *
      * @param ray instance of Ray to check the intersection
      */
     @Override
@@ -90,14 +98,6 @@ public class Plane implements Geometry {
 
         double nQMinusP0 = (q0.subtract(p0)).dotProduct(normal);
         double t = alignZero(nQMinusP0 / nv);
-        if (t == 0) {
-            // endless solutions - the plane include the ray
-            // assumption: in this case there is no intersection
-            return null;
-        }
-        else if (t > 0) {
-            return List.of(ray.getPoint(t));
-        }
-        return null;
+        return t <= 0 ? null : List.of(ray.getPoint(t));
     }
 }
