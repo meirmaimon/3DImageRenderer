@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  * Integration tests
  * testing constructRay and findIntersection
  */
-public class integrationTests {
+public class IntegrationTests {
     /**
      * This methods construct ray through all the pixels
      * and counts how many rays intersect with a given geometry
