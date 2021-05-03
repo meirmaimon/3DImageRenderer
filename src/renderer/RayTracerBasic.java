@@ -40,7 +40,7 @@ public class RayTracerBasic extends RayTracerBase{
 
     /**
      * Gets a point and returns color
-     * @param p
+     * @param p point given
      * @return ambientLight (for now)
      */
     private Color calcColor(Point3D p){

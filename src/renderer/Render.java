@@ -56,8 +56,8 @@ public class Render {
 
     /**
      * A method that creates a grid of lines
-     * @param interval
-     * @param color
+     * @param interval size of square
+     * @param color color of line
      */
     public void printGrid(int interval, Color color) {
         if (imageWriter == null)
