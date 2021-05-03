@@ -26,7 +26,7 @@ public class Scene {
 
     /**
      * Set the Scene's background color
-     * @param background Scene's backgroung color
+     * @param background Scene's background color
      * @return Scene
      */
     public Scene setBackground(Color background) {
@@ -46,8 +46,8 @@ public class Scene {
     }
 
     /**
-     * sets scene geomtries
-     * @param geometries scene geomtries
+     * sets scene geometries
+     * @param geometries scene geometries
      * @return scene
      */
     public Scene setGeometries(Geometries geometries) {

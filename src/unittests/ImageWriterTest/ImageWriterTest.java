@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class ImageWriterTest {
 
     @Test
-    public void writeToImage() {
+    public void writeToImageTest() {
         ImageWriter iw = new ImageWriter("FirstTry", 800 , 500);
         int nx = iw.getNx();
         int ny = iw.getNy();
@@ -29,6 +29,6 @@ public class ImageWriterTest {
 
 
     @Test
-    public void writePixel() {
+    public void writePixelTest() {
     }
 }

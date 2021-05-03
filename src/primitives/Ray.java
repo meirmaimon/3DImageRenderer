@@ -67,6 +67,7 @@ public class Ray {
         Point3D closestPoint = null;
         double distance;
         double min = Double.MAX_VALUE;
+
         for (Point3D point:intersectionPoints) {
             distance = p0.distance(point);
             if ( min > distance) {
