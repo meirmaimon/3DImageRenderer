@@ -20,12 +20,9 @@ import javax.imageio.*;
 public class ImageWriter {
     private int nX;
     private int nY;
-
     private static final String FOLDER_PATH = System.getProperty("user.dir") + "/images";
-
     private BufferedImage image;
     private String imageName;
-
     private Logger logger = Logger.getLogger("ImageWriter");
 
     // ***************** Constructors ********************** //

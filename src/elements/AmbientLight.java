@@ -8,7 +8,6 @@ import primitives.Color;
  */
 public class AmbientLight {
     Color intensity;
-    //TODO
 
     /**
      * Constructor calc the intensity with

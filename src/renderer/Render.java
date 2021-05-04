@@ -42,8 +42,7 @@ public class Render {
      * we put the color in the appropriate pixel of the image maker (writePixel)
      */
     public void renderImage(){
-        if(imageWriter == null || camera == null
-                || rayTracerBase == null || scene == null)
+        if(imageWriter == null || camera == null || rayTracerBase == null || scene == null)
             throw new MissingResourceException("missing data","Render","d");
         int nX = imageWriter.getNx();
         int nY = imageWriter.getNy();
