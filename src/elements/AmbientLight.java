@@ -19,6 +19,10 @@ public class AmbientLight {
         intensity = iA.scale(kA);
     }
 
+    /**
+     * Gets the intensity
+     * @return the intensity
+     */
     public Color getIntensity() {
         return intensity;
     }
