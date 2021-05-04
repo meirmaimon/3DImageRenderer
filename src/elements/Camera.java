@@ -38,7 +38,6 @@ public class Camera {
             this.vTo = vTo.normalized();
             this.vRight = (vTo.crossProduct(vUp)).normalized();
         }
-        // TODO else ?
         else
             throw new IllegalArgumentException("vUp must ber orthogonal to vTo");
     }
@@ -97,30 +96,62 @@ public class Camera {
         return new Ray(p0, pIJ.subtract(p0));
     }
 
+    /**
+     * Gets the position of the camera
+     * @return position of the camera
+     */
     public Point3D getP0() {
         return p0;
     }
 
+    /**
+     * Gets vector that represents the angle of
+     * the camera
+     * @return vector that represents the angle of
+     *  the camera
+     */
     public Vector getvUp() {
         return vUp;
     }
 
+    /**
+     * Gets vector that represents
+     * the direction of the camera
+     * @return the direction of the camera
+     */
     public Vector getvTo() {
         return vTo;
     }
 
+    /**
+     * Gets the orthogonal vector of vTo and
+     * Vup
+     * @return the orthogonal vector of vTo and Vup
+     */
     public Vector getvRight() {
         return vRight;
     }
 
+    /**
+     * Gets the Width of the view plan
+     * @return Width of the view plan
+     */
     public double getWidth() {
         return width;
     }
 
+    /**
+     * Gets the Height of the view plan
+     * @return Gets the Height of the view plan
+     */
     public double getHeight() {
         return height;
     }
 
+    /**
+     * Gets the distance from the view plan
+     * @return distance from the view plan
+     */
     public double getDistance() {
         return distance;
     }

@@ -41,22 +41,23 @@ public class Render {
      * for each pixel a ray will be built and for each ray we will get a color from the ray renderer.
      * we put the color in the appropriate pixel of the image maker (writePixel)
      */
-    public void renderImage(){
-        if(imageWriter == null || camera == null || rayTracerBase == null || scene == null)
-            throw new MissingResourceException("missing data","Render","d");
+    public void renderImage() {
+        if (imageWriter == null || camera == null || rayTracerBase == null || scene == null)
+            throw new MissingResourceException("missing data", "Render", "d");
         int nX = imageWriter.getNx();
         int nY = imageWriter.getNy();
-        for (int i = 0; i < nX; i++){
+        for (int i = 0; i < nX; i++) {
             for (int j = 0; j < nY; j++) {
-                imageWriter.writePixel(i, j, rayTracerBase.traceRay(camera.constructRayThroughPixel(nX ,nY ,j ,i)));
-                }
+                imageWriter.writePixel(i, j, rayTracerBase.traceRay(camera.constructRayThroughPixel(nX, nY, j, i)));
+            }
         }
     }
 
     /**
      * A method that creates a grid of lines
+     *
      * @param interval size of square
-     * @param color color of line
+     * @param color    color of line
      */
     public void printGrid(int interval, Color color) {
         if (imageWriter == null)
@@ -78,9 +79,9 @@ public class Render {
 
     /**
      * The method will first check that a blank value has been entered in the field of the image maker .
-     *  and then run (delegate!) The appropriate method of the image maker.
+     * and then run (delegate!) The appropriate method of the image maker.
      */
-    public void writeToImage(){
+    public void writeToImage() {
         if (imageWriter == null)
             throw new MissingResourceException("no imageWriter", "Render", "d");
         imageWriter.writeToImage();

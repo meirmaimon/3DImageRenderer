@@ -6,8 +6,13 @@ import renderer.ImageWriter;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test for ImageWriterTest
+ */
 public class ImageWriterTest {
-
+    /**
+     * Test for {@link ImageWriter#writeToImage()}
+     */
     @Test
     public void writeToImageTest() {
         ImageWriter iw = new ImageWriter("FirstTry", 800 , 500);
@@ -26,8 +31,9 @@ public class ImageWriterTest {
                 iw.writePixel(j, i, line);
         iw.writeToImage();
     }
-
-
+    /**
+     * Test for {@link ImageWriter#writePixel(int, int, Color)}
+     */
     @Test
     public void writePixelTest() {
     }
