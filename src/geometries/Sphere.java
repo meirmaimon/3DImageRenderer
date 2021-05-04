@@ -7,7 +7,6 @@ import primitives.Vector;
 import java.util.*;
 
 import static primitives.Util.alignZero;
-import static primitives.Util.isZero;
 
 /**
  * This class represents a Sphere

@@ -2,11 +2,10 @@ package geometries;
 
 import primitives.*;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import static primitives.Util.alignZero;
-import static primitives.Util.isZero;
+
 
 /**
  * This class represents a triangle

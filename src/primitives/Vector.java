@@ -1,6 +1,5 @@
 package primitives;
 
-import static primitives.Util.isZero;
 
 /**
  * This class represents a vector in the Cartesian
