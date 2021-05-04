@@ -15,21 +15,41 @@ public class Render {
    private Camera camera;
    private RayTracerBase rayTracerBase;
 
+    /**
+     * Sets image Writer
+     * @param imageWriter imageWriter
+     * @return this
+     */
     public Render setImageWriter(ImageWriter imageWriter) {
         this.imageWriter = imageWriter;
         return this;
     }
 
+    /**
+     * Sets Scene
+     * @param scene scene
+     * @return this
+     */
     public Render setScene(Scene scene) {
         this.scene = scene;
         return this;
     }
 
+    /**
+     * Set camera
+     * @param camera camera
+     * @return this
+     */
     public Render setCamera(Camera camera) {
         this.camera = camera;
         return this;
     }
 
+    /**
+     * set ray tracer
+     * @param rayTracerBase ray tracer base
+     * @return this
+     */
     public Render setRayTracer(RayTracerBase rayTracerBase) {
         this.rayTracerBase = rayTracerBase;
         return this;

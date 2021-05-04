@@ -2,10 +2,12 @@ package geometries;
 import primitives.*;
 
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * This class represent collection of geometries
+ */
 public class Geometries implements Intersectable{
 
     private List<Intersectable> intersectables = new LinkedList<Intersectable>();

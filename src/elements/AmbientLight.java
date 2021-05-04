@@ -7,7 +7,7 @@ import primitives.Color;
  * Also can be reference as the light of a cloudy day
  */
 public class AmbientLight {
-    Color intensity;
+    private Color intensity;
 
     /**
      * Constructor calc the intensity with
