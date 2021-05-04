@@ -10,10 +10,10 @@ import java.util.MissingResourceException;
  * This class creates from the scene the color matrix of the image
  */
 public class Render {
-    ImageWriter imageWriter;
-    Scene scene;
-    Camera camera;
-    RayTracerBase rayTracerBase;
+   private ImageWriter imageWriter;
+   private Scene scene;
+   private Camera camera;
+   private RayTracerBase rayTracerBase;
 
     public Render setImageWriter(ImageWriter imageWriter) {
         this.imageWriter = imageWriter;

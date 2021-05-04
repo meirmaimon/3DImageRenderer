@@ -5,6 +5,9 @@ import primitives.Point3D;
 import primitives.Ray;
 import scene.Scene;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * This class extends RayTracerBase
  * implements basic ray tracer
@@ -30,11 +33,12 @@ public class RayTracerBasic extends RayTracerBase{
      */
     @Override
     public Color traceRay(Ray ray) {
-        if(scene.geometries.findIntersections(ray) == null){
+       List<Point3D> p = new LinkedList<>(scene.geometries.findIntersections(ray)) ;
+        if(p == null){
             return scene.background;
         }
         else{
-            return calcColor(ray.findClosestPoint(scene.geometries.findIntersections(ray)));
+            return calcColor(ray.findClosestPoint(p));
         }
     }
 
