@@ -1,4 +1,5 @@
 package geometries;
+import primitives.Color;
 import primitives.Point3D;
 import primitives.Vector;
 
@@ -7,12 +8,35 @@ import primitives.Vector;
  * to implement
  * returning the normal vector to a point
  */
-public interface Geometry extends Intersectable {
+public abstract class Geometry implements Intersectable {
+    /**
+     * the color of the geometry
+     */
+    protected Color emmission = Color.BLACK;
     /**
      * This methods return the normal vector
      * of the point that on the geometry surface
      * @param point point on the geometry
      * @return the normal vector of the point
      */
-    Vector getNormal(Point3D point);
+    public abstract Vector getNormal(Point3D point);
+
+    /**
+     * Gets the emmission color of
+     * the geometry
+     * @return the emmission color
+     */
+    public Color getEmission() {
+        return emmission;
+    }
+
+    /**
+     * Sets the geometry's color
+     * @param emmission the color
+     * @return this
+     */
+    public Geometry setEmission(Color emmission) {
+        this.emmission = emmission;
+        return this;
+    }
 }

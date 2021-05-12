@@ -14,7 +14,7 @@ import static primitives.Util.alignZero;
  * all the points of the sphere has the
  * same distance from the Sphere's center
  */
-public class Sphere implements Geometry {
+public class Sphere extends Geometry {
 
     private Point3D center;
     private double radius;
@@ -66,13 +66,13 @@ public class Sphere implements Geometry {
     }
 
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
         Vector v = ray.getDir();
         Vector u = null;
         try {
             u = center.subtract(ray.getP0());
         } catch (Exception e) {                 //ray start in the center of the sphere
-            return List.of(ray.getPoint(radius)); // only 1 intersection point in this case
+            return List.of(new GeoPoint(this,ray.getPoint(radius))); // only 1 intersection point in this case
         }
         double radiusSquared = radius * radius;
         double tm = alignZero(v.dotProduct(u));
@@ -87,10 +87,10 @@ public class Sphere implements Geometry {
         double th = Math.sqrt(radiusMinusDSquared);
         double t1 = alignZero(tm + th);
         double t2 = alignZero(tm - th);
-        List<Point3D> intersections = new LinkedList<Point3D>();
-        intersections.add(ray.getPoint(t1));
+        List<GeoPoint> intersections = new LinkedList<GeoPoint>();
+        intersections.add(new GeoPoint(this,ray.getPoint(t1)));
         if (t2 > 0) {
-            intersections.add(ray.getPoint(t2));
+            intersections.add(new GeoPoint(this,ray.getPoint(t2)));
         }
         return intersections;
     }

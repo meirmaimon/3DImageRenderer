@@ -24,8 +24,10 @@ public class Triangle extends Polygon {
     }
 
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
-        List<Point3D> p = plane.findIntersections(ray);
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
+        List<GeoPoint> t = plane.findGeoIntersections(ray);
+        GeoPoint triangleGeo = new GeoPoint(this,t.get(0).point);
+        List<GeoPoint> p = List.of(triangleGeo);
         if (p == null)
             return null;
 
@@ -46,8 +48,8 @@ public class Triangle extends Polygon {
         if (sign1 * sign2 <= 0 || sign1 * sign3 <= 0)
             return null;                            //point outside the triangle
         return p;
+
     }
 }
-
 
 
