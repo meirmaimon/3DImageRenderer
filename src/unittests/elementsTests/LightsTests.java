@@ -7,6 +7,14 @@ import geometries.*;
 import primitives.*;
 import renderer.*;
 import scene.Scene;
+import elements.Camera;
+import geometries.Geometry;
+import geometries.Plane;
+import geometries.Sphere;
+import geometries.Triangle;
+import org.junit.Test;
+import primitives.Point3D;
+import primitives.Vector;
 
 /**
  * Test rendering a basic image
