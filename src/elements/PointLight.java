@@ -59,11 +59,21 @@ public class PointLight extends Light implements LightSource{
 
     }
 
+    /**
+     * getter for the intensity param
+     * @param p the point to calculate its intensity
+     * @return the intensity in the current point
+     */
     @Override
     public Color getIntensity(Point3D p) {
         return super.getIntensity();
     }
 
+    /**
+     * getter for the l vector param
+     * @param p the point to calculate its intensity
+     * @return the l vector from the light source to the point
+     */
     @Override
     public Vector getL(Point3D p) {
         return position.subtract(p).normalized();

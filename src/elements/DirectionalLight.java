@@ -22,6 +22,11 @@ public class DirectionalLight extends Light implements LightSource{
         this.direction = direction;
     }
 
+    /**
+    * getter for the intensity param
+     * @param p the point to calculate its intensity
+     * @return the intensity in the current point
+     */
     @Override
     public Color getIntensity(Point3D p) {
         return getIntensity();
