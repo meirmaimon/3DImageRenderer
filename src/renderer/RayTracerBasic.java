@@ -1,13 +1,15 @@
 package renderer;
 
-import primitives.Color;
-import primitives.Point3D;
-import primitives.Ray;
+import elements.LightSource;
+import primitives.*;
 import scene.Scene;
 
 import java.util.LinkedList;
 import java.util.List;
 import geometries.Intersectable.GeoPoint;
+
+import static primitives.Util.alignZero;
+
 /**
  * This class extends RayTracerBase
  * implements basic ray tracer
@@ -38,7 +40,7 @@ public class RayTracerBasic extends RayTracerBase{
             return scene.background;
         }
         else{
-            return calcColor(ray.findClosestGeoPoint(p));
+            return calcColor(ray.findClosestGeoPoint(p), ray);
         }
     }
 
@@ -47,7 +49,43 @@ public class RayTracerBasic extends RayTracerBase{
      * @param p point given
      * @return ambientLight (for now)
      */
-    private Color calcColor(GeoPoint p){
-        return scene.ambientLight.getIntensity().add(p.geometry.getEmission());
+    private Color calcColor(GeoPoint p, Ray ray){
+        Color I0 = scene.ambientLight.getIntensity().add(p.geometry.getEmission());
+       return I0.add(calcLocalEffects(p, ray));
     }
+
+    private Color calcLocalEffects(GeoPoint intersection, Ray ray) {
+        Vector v = ray.getDir();
+        Vector n = intersection.geometry.getNormal(intersection.point);
+        double nv = alignZero(n.dotProduct(v));
+        if (nv == 0) return Color.BLACK;
+        Material material = intersection.geometry.getMaterial();
+        int nShininess = material.getShininess();
+        double kd = material.getKd(), ks = material.getKs();
+        Color color = Color.BLACK;
+        for (LightSource lightSource : scene.lights) {
+            Vector l = lightSource.getL(intersection.point);
+            double nl = alignZero(n.dotProduct(l));
+            if (nl * nv > 0) { // sign(nl) == sing(nv)
+                Color lightIntensity = lightSource.getIntensity(intersection.point);
+                color = color.add(calcDiffusive(kd, l, n, lightIntensity),
+                        calcSpecular(nl, ks, l, n, v, nShininess, lightIntensity));
+
+            }
+        }
+        return color;
+    }
+
+    public Color calcDiffusive(double kd, Vector l, Vector n, Color lightIntensity)  {
+        return lightIntensity.scale(kd * Math.abs(l.dotProduct(n)));
+    }
+
+    private Color calcSpecular(double nl, double ks, Vector l, Vector n, Vector v, int nShininess, Color lightIntensity) {
+        Vector r = n.scale(2 * nl).subtract(l).normalized();
+        double vr = Math.max(0, v.dotProduct(r) * (-1));
+        return lightIntensity.scale(ks * Math.pow(vr, nShininess));
+    }
+
+
+
 }

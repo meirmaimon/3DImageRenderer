@@ -3,11 +3,18 @@ package elements;
 import primitives.Color;
 
 /**
- * This class represnt the ambient light of the Scene
+ * This class represent the ambient light of the Scene
  * Also can be reference as the light of a cloudy day
  */
-public class AmbientLight {
-    private Color intensity;
+public class AmbientLight extends Light {
+
+    /**
+     * default Constructor
+     * send the color black to Light's constructor
+     */
+    public AmbientLight() {
+        super(Color.BLACK);
+    }
 
     /**
      * Constructor calc the intensity with
@@ -15,15 +22,8 @@ public class AmbientLight {
      * @param iA Color
      * @param kA reduction factor
      */
-    public AmbientLight(Color iA, double kA) {
-        intensity = iA.scale(kA);
-    }
 
-    /**
-     * Gets the intensity
-     * @return the intensity
-     */
-    public Color getIntensity() {
-        return intensity;
+     public AmbientLight(Color iA, double kA) {
+        super(iA.scale(kA));
     }
 }
