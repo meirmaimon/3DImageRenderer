@@ -22,7 +22,6 @@ public class AmbientLight extends Light {
      * @param iA Color
      * @param kA reduction factor
      */
-
      public AmbientLight(Color iA, double kA) {
         super(iA.scale(kA));
     }

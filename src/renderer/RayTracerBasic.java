@@ -35,25 +35,40 @@ public class RayTracerBasic extends RayTracerBase{
      */
     @Override
     public Color traceRay(Ray ray) {
-       List<GeoPoint> p = new LinkedList<>(scene.geometries.findGeoIntersections(ray)) ;
-        if(p == null){
+        List<GeoPoint> p = new LinkedList<>(scene.geometries.findGeoIntersections(ray));
+        if (p == null) {
             return scene.background;
         }
-        else{
-            return calcColor(ray.findClosestGeoPoint(p), ray);
-        }
+        /*
+        List<GeoPoint> p;
+        try {
+            p = new LinkedList<>(scene.geometries.findGeoIntersections(ray));
+        } catch (NullPointerException e) {
+                return scene.background;
+
+        }*/
+
+        return calcColor(ray.findClosestGeoPoint(p), ray);
+
     }
 
     /**
-     * Gets a point and returns color
-     * @param p point given
-     * @return ambientLight (for now)
+     * Gets a point and returns color - Calculated according to the Phong method
+     * @param p geoPoint given
+     * @param ray the ray from the camera to the point
+     * @return color to the point
      */
     private Color calcColor(GeoPoint p, Ray ray){
         Color I0 = scene.ambientLight.getIntensity().add(p.geometry.getEmission());
        return I0.add(calcLocalEffects(p, ray));
     }
 
+    /**
+     * Gets a point and returns color according to the Phong method
+     * @param intersection geoPoint given
+     * @param ray the ray from the camera to the point
+     * @return color to the point, only the left part of the equation
+     */
     private Color calcLocalEffects(GeoPoint intersection, Ray ray) {
         Vector v = ray.getDir();
         Vector n = intersection.geometry.getNormal(intersection.point);
@@ -76,10 +91,28 @@ public class RayTracerBasic extends RayTracerBase{
         return color;
     }
 
+    /**
+     * Gets the parameters of the diffusive part of the equation
+     * @param kd the coefficient of the diffuse material
+     * @param l vector l from the light source to the point
+     * @param n the normal vector from the point
+     * @param lightIntensity the light intensity color of the current light source (Il in the equation)
+     * @return color calculated by the diffusive part
+     */
     public Color calcDiffusive(double kd, Vector l, Vector n, Color lightIntensity)  {
         return lightIntensity.scale(kd * Math.abs(l.dotProduct(n)));
     }
 
+    /**
+     * Gets the parameters of the specular part of the equation
+     * @param nl the angle between n and l vectors
+     * @param ks the coefficient of the specular material
+     * @param l vector l from the light source to the point
+     * @param n the normal vector from the point
+     * @param nShininess the shininess coefficient of the material
+     * @param lightIntensity the light intensity color of the current light source (Il in the equation)
+     * @return color calculated by the specular part
+     */
     private Color calcSpecular(double nl, double ks, Vector l, Vector n, Vector v, int nShininess, Color lightIntensity) {
         Vector r = n.scale(2 * nl).subtract(l).normalized();
         double vr = Math.max(0, v.dotProduct(r) * (-1));
