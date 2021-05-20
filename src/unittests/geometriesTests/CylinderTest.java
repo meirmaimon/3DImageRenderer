@@ -48,15 +48,15 @@ public class CylinderTest {
         Point3D p7 = new Point3D(2,0,0);
         assertEquals("Cylinder getNormal() wrong result",new Vector(1,0,0),cy.getNormal(p7));
     }
-    
-    /**
-     * Test methods for
-     * {@link geometries.Cylinder#findIntersections(Ray)}
-     */
-   // @Test
-  //  public void findIntersections() {
-        // ============ Equivalence Partitions Tests ==============
-        // TC01: simple test
-   //     fail("not implemented");
-    //}
+
+//    /**
+//     * Test methods for
+//     * {@link geometries.Cylinder#findIntersections(Ray)}
+//     */
+//   // @Test
+//  //  public void findIntersections() {
+//        // ============ Equivalence Partitions Tests ==============
+//        // TC01: simple test
+//   //     fail("not implemented");
+//    //}
 }

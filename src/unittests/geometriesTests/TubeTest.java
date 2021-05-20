@@ -28,14 +28,14 @@ public class TubeTest {
         Vector normal2 = tb.getNormal(new Point3D(0,0,1));
         assertEquals("Tube getNormal() wrong result",new Vector(0,0,1),normal2);
     }
-    /**
-     * Test methods for
-     * {@link geometries.Tube#findIntersections(Ray)}
-     */
-    //@Test
-    //public void testFindIntersections() {
-        // ============ Equivalence Partitions Tests ==============
-        // TC01: simple test
-      //  fail("not implemented");
-   // }
+//    /**
+//     * Test methods for
+//     * {@link geometries.Tube#findIntersections(Ray)}
+//     */
+//    //@Test
+//    //public void testFindIntersections() {
+//        // ============ Equivalence Partitions Tests ==============
+//        // TC01: simple test
+//      //  fail("not implemented");
+//   // }
 }

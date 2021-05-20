@@ -85,14 +85,14 @@ public class PolygonTests {
         double sqrt3 = Math.sqrt(1d / 3);
         assertEquals("Bad normal to trinagle", new Vector(sqrt3, sqrt3, sqrt3), pl.getNormal(new Point3D(0, 0, 1)));
     }
-    /**
-     * Test methods for
-     * {@link geometries.Polygon#findIntersections(Ray)}
-     */
-   // @Test
-   // public void findIntersections() {
-        // ============ Equivalence Partitions Tests ==============
-        // TC01: simple test
-        //fail("not implemented");
-   // }
+//    /**
+//     * Test methods for
+//     * {@link geometries.Polygon#findIntersections(Ray)}
+//     */
+//   // @Test
+//   // public void findIntersections() {
+//        // ============ Equivalence Partitions Tests ==============
+//        // TC01: simple test
+//        //fail("not implemented");
+//   // }
 }
