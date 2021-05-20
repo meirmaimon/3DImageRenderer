@@ -59,7 +59,7 @@ public class Render {
         int nY = imageWriter.getNy();
         for (int i = 0; i < nX; i++) {
             for (int j = 0; j < nY; j++) {
-                imageWriter.writePixel(i, j, rayTracer.traceRay(camera.constructRayThroughPixel(nX, nY, j, i)));
+                imageWriter.writePixel(i, j, rayTracer.traceRay(camera.constructRayThroughPixel(nX, nY, i, j)));
             }
         }
     }
