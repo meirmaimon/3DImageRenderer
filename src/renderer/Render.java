@@ -2,7 +2,6 @@ package renderer;
 
 import elements.Camera;
 import primitives.Color;
-import scene.Scene;
 
 import java.util.MissingResourceException;
 
@@ -10,13 +9,13 @@ import java.util.MissingResourceException;
  * This class creates from the scene the color matrix of the image
  */
 public class Render {
-   private ImageWriter imageWriter;
-   private Scene scene;
-   private Camera camera;
-   private RayTracerBase rayTracerBase;
+    private ImageWriter imageWriter;
+    private Camera camera;
+    private RayTracerBase rayTracer;
 
     /**
      * Sets image Writer
+     *
      * @param imageWriter imageWriter
      * @return this
      */
@@ -26,17 +25,8 @@ public class Render {
     }
 
     /**
-     * Sets Scene
-     * @param scene scene
-     * @return this
-     */
-    public Render setScene(Scene scene) {
-        this.scene = scene;
-        return this;
-    }
-
-    /**
      * Set camera
+     *
      * @param camera camera
      * @return this
      */
@@ -47,11 +37,12 @@ public class Render {
 
     /**
      * set ray tracer
+     *
      * @param rayTracerBase ray tracer base
      * @return this
      */
     public Render setRayTracer(RayTracerBase rayTracerBase) {
-        this.rayTracerBase = rayTracerBase;
+        this.rayTracer = rayTracerBase;
         return this;
     }
 
@@ -62,13 +53,13 @@ public class Render {
      * we put the color in the appropriate pixel of the image maker (writePixel)
      */
     public void renderImage() {
-        if (imageWriter == null || camera == null || rayTracerBase == null || scene == null)
+        if (imageWriter == null || camera == null || rayTracer == null)
             throw new MissingResourceException("missing data", "Render", "d");
         int nX = imageWriter.getNx();
         int nY = imageWriter.getNy();
         for (int i = 0; i < nX; i++) {
             for (int j = 0; j < nY; j++) {
-                imageWriter.writePixel(i, j, rayTracerBase.traceRay(camera.constructRayThroughPixel(nX, nY, j, i)));
+                imageWriter.writePixel(i, j, rayTracer.traceRay(camera.constructRayThroughPixel(nX, nY, j, i)));
             }
         }
     }

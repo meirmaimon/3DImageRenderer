@@ -74,7 +74,6 @@ public class RayTracerBasic extends RayTracerBase{
                 Color lightIntensity = lightSource.getIntensity(intersection.point);
                 color = color.add(calcDiffusive(kd, l, n, lightIntensity),
                         calcSpecular(nl, ks, l, n, v, nShininess, lightIntensity));
-
             }
         }
         return color;

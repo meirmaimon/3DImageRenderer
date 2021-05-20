@@ -15,9 +15,9 @@ import java.util.List;
  */
 public class Scene {
     public String name;
-    public Color background;
-    public AmbientLight ambientLight;
-    public Geometries geometries;
+    public Color background = Color.BLACK;
+    public AmbientLight ambientLight = new AmbientLight();
+    public Geometries geometries = new Geometries();
     public List<LightSource> lights = new LinkedList<LightSource>();
 
 
@@ -27,7 +27,6 @@ public class Scene {
      */
     public Scene(String name) {
         this.name = name;
-        geometries = new Geometries();
     }
 
     /**
