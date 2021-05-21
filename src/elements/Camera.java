@@ -81,20 +81,33 @@ public class Camera {
      * @return the ray that going through the given pixel
      */
     public Ray constructRayThroughPixel(int nX, int nY, int j, int i) {
-        if ((i < 0 || i > (nY - 1)) || (j < 0 || j > (nX - 1)))
+       /* if ((i < 0 || i > (nY - 1)) || (j < 0 || j > (nX - 1)))
             throw new IllegalArgumentException("Pixels index between 0 to N-1");
-        double rX = height / nX;
-        double rY = width / nY;
+        double rX = width / nX;
+        double rY = height / nY;
         Point3D pC = p0.add(vTo.scale(distance));
-        double xJ = (j - (nX - 1) / 2.0) * rX;
-        double yI = ((nY - 1) / 2.0 - i) * rY;
+        double yI = (i - (nY-1)/2 ) * rY * (-1);
+        double xJ = (j - (nX-1)/2 ) * rX;
+        // double xJ = (j - (nX - 1) / 2.0) * rX;
+        // double yI = ((nY - 1) / 2.0 - i) * rY;
         Point3D pIJ = pC;
         if (!isZero(xJ))
             pIJ = pIJ.add(vRight.scale(xJ));
         if (!isZero(yI))
             pIJ = pIJ.add(vUp.scale(yI));
+        return new Ray(p0, pIJ.subtract(p0));*/
+        double yI = alignZero((((nY - 1) / 2d) - i) * (height / nY)),
+                xJ = alignZero((j - (nX - 1) / 2d) * (width / nX));
+
+        Point3D pIJ = p0.add(vTo.scale(distance)); // center of the VP
+        if (xJ != 0)
+            pIJ = pIJ.add(vRight.scale(xJ));
+        if (yI != 0)
+            pIJ = pIJ.add(vUp.scale(yI));
+
         return new Ray(p0, pIJ.subtract(p0));
     }
+
 
     /**
      * Gets the position of the camera

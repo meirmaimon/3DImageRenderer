@@ -106,7 +106,4 @@ public class RayTracerBasic extends RayTracerBase{
         double vr = Math.max(0, v.dotProduct(r) * (-1));
         return lightIntensity.scale(ks * Math.pow(vr, nShininess));
     }
-
-
-
 }
