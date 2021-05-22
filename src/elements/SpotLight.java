@@ -5,7 +5,10 @@ import primitives.Point3D;
 import primitives.Vector;
 
 /**
- * TODO
+ * Spot light extends class point light
+ * represents a source light
+ * the intensity affect both by the direction
+ * and distance
  */
 public class SpotLight extends PointLight{
     private Vector direction;
@@ -20,6 +23,13 @@ public class SpotLight extends PointLight{
      */
     public SpotLight(Color intensity, Point3D position, Vector direction) {
         super(intensity, position);
-        this.direction = direction;
+        this.direction = direction.normalize();
+    }
+    @Override
+    public Color getIntensity(Point3D p){
+        double dotProduct = direction.dotProduct(getL(p));
+        if (dotProduct <= 0)
+            return Color.BLACK;             //intensity.scale(0)
+        return super.getIntensity(p).scale(dotProduct);
     }
 }

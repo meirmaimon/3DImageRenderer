@@ -3,14 +3,15 @@ package elements;
 import primitives.Color;
 
 /**
- * TODO
+ * This class represents different kinds of
+ * lights in the scene
  */
 abstract class Light {
     protected Color intensity;
 
     /**
-     * TODO
-     * @param intensity
+     * Constructor create a Light with the intensity given
+     * @param intensity the intensity of the light
      */
     protected Light(Color intensity) {
         this.intensity = intensity;

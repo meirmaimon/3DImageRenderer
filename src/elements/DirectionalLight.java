@@ -7,7 +7,7 @@ import primitives.Vector;
 /**
  * This class represents the source of direct light
  */
-public class DirectionalLight extends Light implements LightSource{
+    public class DirectionalLight extends Light implements LightSource{
     private Vector direction;
 
     /**
@@ -19,21 +19,15 @@ public class DirectionalLight extends Light implements LightSource{
      */
     public DirectionalLight(Color intensity, Vector direction) {
         super(intensity);
-        this.direction = direction;
+        this.direction = direction.normalize();
     }
 
-    /**
-    * getter for the intensity param
-     * @param p the point to calculate its intensity
-     * @return the intensity in the current point
-     */
     @Override
     public Color getIntensity(Point3D p) {
         return intensity;
     }
 
     @Override
-    //TODO
     public Vector getL(Point3D p) {
         return direction;
     }
