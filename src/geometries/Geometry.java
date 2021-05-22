@@ -14,13 +14,24 @@ public abstract class Geometry implements Intersectable {
      * the color of the geometry
      */
     protected Color emmission = Color.BLACK;
+    /**
+     * The Material of the geometry
+     */
+    protected Material material = new Material();
 
-    private Material material = new Material();
-
+    /**
+     * Gets the material
+     * @return the material of the geometry
+     */
     public Material getMaterial() {
         return material;
     }
 
+    /**
+     * Set the material
+     * @param material the material of the geometry
+     * @return this
+     */
     public Geometry setMaterial(Material material) {
         this.material = material;
         return this;

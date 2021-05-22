@@ -13,8 +13,14 @@ public interface LightSource {
      * @param p point given
      * @return Intensity of the light in a given point
      */
-    public Color getIntensity(Point3D p);
+    Color getIntensity(Point3D p);
 
-    public Vector getL(Point3D p);
+    /**
+     * Gets the direction between the source light and
+     *  given point
+     * @param p the point direction calculate to
+     * @return the direction between the source light and the point
+     */
+    Vector getL(Point3D p);
 }
 

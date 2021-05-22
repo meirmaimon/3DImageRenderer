@@ -48,8 +48,8 @@ public class RayTracerBasic extends RayTracerBase{
      * @return color to the point
      */
     private Color calcColor(GeoPoint p, Ray ray){
-        Color I0 = scene.ambientLight.getIntensity().add(p.geometry.getEmission());
-       return I0.add(calcLocalEffects(p, ray));
+        Color i0 = scene.ambientLight.getIntensity().add(p.geometry.getEmission());
+       return i0.add(calcLocalEffects(p, ray));
     }
 
     /**
@@ -102,9 +102,11 @@ public class RayTracerBasic extends RayTracerBase{
      * @return color calculated by the specular part
      */
     private Color calcSpecular(double nl, double ks, Vector l, Vector n, Vector v, int nShininess, Color lightIntensity) {
-        Vector r = n.scale(2 * nl).subtract(l).normalized();
-        double vr = Math.max(0, v.dotProduct(r) * (-1));
-        return lightIntensity.scale(ks * Math.pow(vr, nShininess));
+        Vector r = l.subtract(n.scale(2*nl));
+        double vr = v.scale(-1).dotProduct(r);
+        if(vr <= 0)
+            return Color.BLACK;
+        return lightIntensity.scale(ks*Math.pow(vr,nShininess));
     }
 
 
