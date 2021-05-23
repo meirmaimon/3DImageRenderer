@@ -37,8 +37,8 @@ public class LightsTests {
 	private static Geometry triangle2 = new Triangle( //
 			new Point3D(-150, -150, -150), new Point3D(-70, 70, -50), new Point3D(75, 75, -150));
 	private static Geometry sphere = new Sphere(new Point3D(0, 0, -50), 50) //
-			.setEmission(new Color(java.awt.Color.BLUE)) //
-			.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(100));
+			.setEmission(new Color(50,50,100)) //
+			.setMaterial(new Material().setKd(0.5).setKs(5).setShininess(500));
 
 	/**
 	 * Produce a picture of a sphere lighted by a directional light
@@ -99,11 +99,11 @@ public class LightsTests {
 	@Test
 	public void sphereSpotAndPointAndDirectional() {
 		scene1.geometries.add(sphere);
-		scene1.lights.add(new SpotLight(new Color(500, 300, 0), new Point3D(-50, -50, 50), new Vector(1, 1, -2)) //
-				.setKl(0.00001).setKq(0.00000001));
-		scene1.lights.add(new PointLight(new Color(500, 300, 0), new Point3D(150, 150, -50))//
-				.setKl(0.00001).setKq(0.000001));
-		scene1.lights.add(new DirectionalLight(new Color(500, 300, 0), new Vector(1, 1, -1)));
+		scene1.lights.add(new SpotLight(new Color(500, 100, 0), new Point3D(-50, -50, 50), new Vector(1, 1, -2)) //
+				.setKl(0.001).setKq(0.00001));
+		scene1.lights.add(new PointLight(new Color(200, 500, 0), new Point3D(150, 150, 100))//
+				.setKl(0.0001).setKq(0.00001));
+		scene1.lights.add(new DirectionalLight(new Color(0, 100, 800), new Vector(1, -1, -1)));
 
 		ImageWriter imageWriter = new ImageWriter("lightSphereSpotPointDirectional", 500, 500);
 		Render render = new Render()//
@@ -175,12 +175,12 @@ public class LightsTests {
 	 */
 	@Test
 	public void trianglesSpotAndDirectional() {
-		scene2.geometries.add(triangle1.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(300)),
+		scene2.geometries.add(triangle1.setMaterial(new Material().setKd(0.4).setKs(2.5).setShininess(300)),
 				triangle2.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(300)));
-		scene2.lights.add(new SpotLight(new Color(600, 350, 250), new Point3D(20, -5, -130), new Vector(-6, -1, 0)) //
+		scene2.lights.add(new SpotLight(new Color(600, 350, 250), new Point3D(70, 30, -130), new Vector(-3, -3, 0)) //
 				.setKl(0.0001).setKq(0.000005));
-		scene2.lights.add(new DirectionalLight(new Color(500, 200, 200), new Vector(0, -0.5, -1)));
-		scene2.lights.add(new PointLight(new Color(250 , 250,250),new Point3D(-20,5,-120)).setKl(0.0002).setKq(0.0008));
+		scene2.lights.add(new DirectionalLight(new Color(200, 200, 500), new Vector(0, -0.5, -1)));
+		scene2.lights.add(new PointLight(new Color(250 , 500,250),new Point3D(-40,-80,-120)).setKl(0.0002).setKq(0.0008));
 		ImageWriter imageWriter = new ImageWriter("lightTrianglesSpotDirectional", 500, 500);
 		Render render = new Render()//
 				.setImageWriter(imageWriter) //

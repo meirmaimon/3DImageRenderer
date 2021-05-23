@@ -74,7 +74,7 @@ public class Render {
         if (imageWriter == null)
             throw new MissingResourceException("no imageWriter", "Render", "d");
         int nx = imageWriter.getNx();
-        int ny = imageWriter.getNx();
+        int ny = imageWriter.getNy();
 
         for (int i = 0; i < ny; i += interval) {
             for (int j = 0; j < nx; j++) {

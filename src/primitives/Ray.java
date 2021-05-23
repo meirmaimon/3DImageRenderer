@@ -1,8 +1,11 @@
 package primitives;
+
 import geometries.Intersectable;
 import geometries.Intersectable.GeoPoint;
+
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * This class Represents a Ray in the 3D Cartesian\
@@ -14,7 +17,8 @@ public class Ray {
 
     /**
      * Creates a ray with given a point and direction
-     * @param p0 The Ray's head
+     *
+     * @param p0  The Ray's head
      * @param dir The Ray's direction
      */
     public Ray(Point3D p0, Vector dir) {
@@ -24,6 +28,7 @@ public class Ray {
 
     /**
      * Gets the ray's head
+     *
      * @return Ray's head
      */
     public Point3D getP0() {
@@ -32,6 +37,7 @@ public class Ray {
 
     /**
      * Gets the direction vector of the ray
+     *
      * @return Ray's direction
      */
     public Vector getDir() {
@@ -50,11 +56,12 @@ public class Ray {
      * This methods returns the point on the ray
      * that is on the end of the direction vector
      * after scaling
+     *
      * @param t scalar
      * @return the point at the end of the direction vector
      * of the ray after being scaled
      */
-    public Point3D getPoint(double t){
+    public Point3D getPoint(double t) {
         Vector v = dir.scale(t);
         return p0.add(v);
     }
@@ -62,38 +69,35 @@ public class Ray {
     /**
      * Return the closest point to the ray's start
      * from the points given
-     * @param intersectionPoints  the points given
+     *
+     * @param intersectionPoints the points given
      * @return the closest point to the ray's start
      */
-    public Point3D findClosestPoint(List<Point3D> intersectionPoints){
-        Point3D closestPoint = null;
-        double distance;
-        double min = Double.MAX_VALUE;
-
-        for (Point3D point:intersectionPoints) {
-            distance = p0.distance(point);
-            if ( min > distance) {
-                min = distance;
-                closestPoint = point;
-            }
-        }
-        return closestPoint;
+    public Point3D findClosestPoint(List<Point3D> intersectionPoints) {
+        if (intersectionPoints == null)
+            return null;
+        return findClosestGeoPoint(intersectionPoints //
+                .stream().map(p -> new GeoPoint(null, p)) //
+                .collect(Collectors.toList())
+        ).point;
     }
 
     /**
      * Gets the closest GeoPoint to the ray's head
      * from list of points
+     *
      * @param intersectionPoints points calculate distance from
      * @return closest GeoPoint
      */
-    public GeoPoint findClosestGeoPoint(List<GeoPoint> intersectionPoints){
+    public GeoPoint findClosestGeoPoint(List<GeoPoint> intersectionPoints) {
+        if (intersectionPoints == null)
+            return null;
         GeoPoint closestGeoPoint = null;
-        double distance;
         double min = Double.MAX_VALUE;
 
-        for (GeoPoint geoPoint:intersectionPoints) {
-            distance = p0.distance(geoPoint.point);
-            if ( min > distance) {
+        for (GeoPoint geoPoint : intersectionPoints) {
+            double distance = p0.distance(geoPoint.point);
+            if (min > distance) {
                 min = distance;
                 closestGeoPoint = geoPoint;
             }

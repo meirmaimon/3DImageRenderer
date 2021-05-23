@@ -18,6 +18,7 @@ public class Sphere extends Geometry {
 
     private Point3D center;
     private double radius;
+    private double rSquared;
 
     /**
      * Creates a Sphere with point a radius given
@@ -30,6 +31,7 @@ public class Sphere extends Geometry {
         if (radius <= 0)
             throw new IllegalArgumentException("Radius must be greater than 0");
         this.radius = radius;
+        this.rSquared = radius * radius;
     }
 
     /**
@@ -67,31 +69,26 @@ public class Sphere extends Geometry {
 
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray) {
-        Vector v = ray.getDir();
         Vector u = null;
         try {
             u = center.subtract(ray.getP0());
         } catch (Exception e) {                 //ray start in the center of the sphere
-            return List.of(new GeoPoint(this,ray.getPoint(radius))); // only 1 intersection point in this case
+            return List.of(new GeoPoint(this, ray.getPoint(radius))); // only 1 intersection point in this case
         }
-        double radiusSquared = radius * radius;
-        double tm = alignZero(v.dotProduct(u));
-        double uSquared = u.lengthSquared();
-        if (alignZero(uSquared - radiusSquared) >= 0 && tm <= 0)
+
+        double tm = alignZero(ray.getDir().dotProduct(u));
+        double thSquared = rSquared - (u.lengthSquared() - (tm * tm));
+        if (alignZero(thSquared) <= 0) // the line is out of the sphere
             return null;
 
-        double radiusMinusDSquared = radiusSquared - (uSquared - (tm * tm));
-        if (alignZero(radiusMinusDSquared) <= 0)             //there is no intersection points
-            return null;
+        double th = Math.sqrt(thSquared);
+        double t2 = alignZero(tm + th);
+        if (t2 <= 0) return null;
 
-        double th = Math.sqrt(radiusMinusDSquared);
-        double t1 = alignZero(tm + th);
-        double t2 = alignZero(tm - th);
-        List<GeoPoint> intersections = new LinkedList<GeoPoint>();
-        intersections.add(new GeoPoint(this,ray.getPoint(t1)));
-        if (t2 > 0) {
-            intersections.add(new GeoPoint(this,ray.getPoint(t2)));
-        }
-        return intersections;
+        double t1 = alignZero(tm - th);
+        if (t1 > 0)
+            return List.of(new GeoPoint(this, ray.getPoint(t1)),new GeoPoint(this, ray.getPoint(t2)));
+        else
+            return List.of(new GeoPoint(this, ray.getPoint(t2)));
     }
 }

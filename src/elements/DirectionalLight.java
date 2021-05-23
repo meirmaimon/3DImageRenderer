@@ -7,13 +7,14 @@ import primitives.Vector;
 /**
  * This class represents the source of direct light
  */
-    public class DirectionalLight extends Light implements LightSource{
+public class DirectionalLight extends Light implements LightSource {
     private Vector direction;
 
     /**
      * the constructor get intensity and direction
      * and call the constructor of the father with intensity
      * and set direction
+     *
      * @param intensity
      * @param direction
      */

@@ -5,40 +5,13 @@ package primitives;
  * geometries in the scene
  */
 public class Material {
-    public double kD;
-    public double kS;
-    public int nShininess;
-
-    public Material() {
-        this.kD = 0;
-        this.kS = 0;
-        this.nShininess = 0;
-    }
-
-    /**
-     * Gets the attenuation factor kD
-     * @return Gets the attenuation factor kD
-     */
-    public double getKd() {
-        return kD;
-    }
-    /**
-     * Gets the attenuation factor kS
-     * @return Gets the attenuation factor kS
-     */
-    public double getKs() {
-        return kS;
-    }
-    /**
-     * Gets the shininess factor
-     * @return Gets the shininess.
-     */
-    public int getShininess() {
-        return nShininess;
-    }
+    public double kD = 0;
+    public double kS = 0;
+    public int nShininess = 0;
 
     /**
      * Sets the attenuation factor kD
+     *
      * @param kD attenuation factor
      * @return this
      */
@@ -49,6 +22,7 @@ public class Material {
 
     /**
      * Sets the attenuation factor kS
+     *
      * @param kS attenuation factor kS
      * @return this
      */
@@ -59,6 +33,7 @@ public class Material {
 
     /**
      * Sets the shininess
+     *
      * @param nShininess the shininess factor
      * @return this
      */
@@ -66,9 +41,5 @@ public class Material {
         this.nShininess = nShininess;
         return this;
     }
-
-
-
-
 
 }
