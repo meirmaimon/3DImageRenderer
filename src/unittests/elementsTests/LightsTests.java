@@ -175,9 +175,10 @@ public class LightsTests {
 	public void trianglesSpotAndDirectional() {
 		scene2.geometries.add(triangle1.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(300)),
 				triangle2.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(300)));
-		scene2.lights.add(new SpotLight(new Color(500, 250, 250), new Point3D(10, -10, -130), new Vector(-2, -2, -1)) //
+		scene2.lights.add(new SpotLight(new Color(600, 350, 250), new Point3D(20, -5, -130), new Vector(-6, -1, 0)) //
 				.setKl(0.0001).setKq(0.000005));
-		scene2.lights.add(new DirectionalLight(new Color(300, 150, 150), new Vector(0, 0, -1)));
+		scene2.lights.add(new DirectionalLight(new Color(500, 200, 200), new Vector(0, -0.5, -1)));
+		scene2.lights.add(new PointLight(new Color(250 , 250,250),new Point3D(-20,5,-120)).setKl(0.0002).setKq(0.0008));
 		ImageWriter imageWriter = new ImageWriter("lightTrianglesSpotDirectional", 500, 500);
 		Render render = new Render()//
 				.setImageWriter(imageWriter) //
