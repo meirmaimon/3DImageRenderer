@@ -97,13 +97,15 @@ public class LightsTests {
 	 * Produce a picture of a sphere lighted by a spot light and Point light
 	 */
 	@Test
-	public void sphereSpotAndPoint() {
+	public void sphereSpotAndPointAndDirectional() {
 		scene1.geometries.add(sphere);
 		scene1.lights.add(new SpotLight(new Color(500, 300, 0), new Point3D(-50, -50, 50), new Vector(1, 1, -2)) //
 				.setKl(0.00001).setKq(0.00000001));
-		scene1.lights.add(new PointLight(new Color(500, 300, 0), new Point3D(-50, -50, 50))//
+		scene1.lights.add(new PointLight(new Color(500, 300, 0), new Point3D(150, 150, -50))//
 				.setKl(0.00001).setKq(0.000001));
-		ImageWriter imageWriter = new ImageWriter("lightSphereSpotPoint", 500, 500);
+		scene1.lights.add(new DirectionalLight(new Color(500, 300, 0), new Vector(1, 1, -1)));
+
+		ImageWriter imageWriter = new ImageWriter("lightSphereSpotPointDirectional", 500, 500);
 		Render render = new Render()//
 				.setImageWriter(imageWriter) //
 				.setCamera(camera1) //
