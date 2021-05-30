@@ -3,9 +3,12 @@ package primitives;
 import geometries.Intersectable;
 import geometries.Intersectable.GeoPoint;
 
+import javax.lang.model.type.PrimitiveType;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static primitives.Util.alignZero;
 
 /**
  * This class Represents a Ray in the 3D Cartesian\
@@ -24,6 +27,12 @@ public class Ray {
     public Ray(Point3D p0, Vector dir) {
         this.p0 = p0;
         this.dir = dir.normalized();
+    }
+    private static final double DELTA = 0.1;
+
+    public Ray(Point3D head, Vector direction, Vector normal) {
+        p0 = head.add(normal.scale(alignZero(direction.dotProduct(normal)) > 0 ? DELTA : -DELTA));
+        dir = direction;
     }
 
     /**
