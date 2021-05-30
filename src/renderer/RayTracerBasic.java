@@ -22,6 +22,16 @@ public class RayTracerBasic extends RayTracerBase {
      */
     private static final double DELTA = 0.1;
     /**
+     * This constant used for calculation of transparency
+     */
+    private static final int MAX_CALC_COLOR_LEVEL = 10;
+    /**
+     * This constant used for calculation of reflection
+     */
+    private static final double MIN_CALC_COLOR_K = 0.001;
+
+
+    /**
      * Constructor create ray tracer basic
      * with given scene
      *
