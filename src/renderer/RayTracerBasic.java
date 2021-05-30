@@ -196,10 +196,8 @@ public class RayTracerBasic extends RayTracerBase {
     /**
      * Check if a particular point is shaded or not
      *
-     * @param ls - The light directed to the point (p)
      * @param l  - The vector from light to point (p)
      * @param n  - The normal at the point (p)
-     * @param p  - A point where the light is in its direction
      * @return False - there is shadow, True - there is no shadow
      */
     private double transparency(LightSource light, Vector l, Vector n, GeoPoint geoPoint) {
