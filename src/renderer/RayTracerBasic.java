@@ -80,6 +80,7 @@ public class RayTracerBasic extends RayTracerBase {
         Color color = intersection.geometry.getEmission().add(calcLocalEffects(intersection, ray, k));
         return 1 == level ? color : color.add(calcGlobalEffects(intersection, ray.getDir(), level, k));
     }
+
     /**
      * Calculates the color at the given points, taking into account the reflection
      * and refraction.
@@ -124,7 +125,7 @@ public class RayTracerBasic extends RayTracerBase {
      * @param intersection - A point in the scene, which is on a geometric shape
      * @param ray          - The ray from the camera that hit the above point
      * @return The color of the geometry according to the local variables, such as
-     *         the material and the light sources.
+     * the material and the light sources.
      */
     private Color calcLocalEffects(GeoPoint intersection, Ray ray, double k) {
 
@@ -242,6 +243,7 @@ public class RayTracerBasic extends RayTracerBase {
     private Ray constructRefractedRay(Point3D p, Vector v, Vector n) {
         return new Ray(p, v, n);
     }
+
     /**
      * Gets the parameters of the specular part of the equation
      *
