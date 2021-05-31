@@ -20,6 +20,7 @@ public class Camera {
     private double width;
     private double height;
     private double distance;
+    private Point3D pC;
 
     /**
      * Creates a camera with
@@ -67,6 +68,7 @@ public class Camera {
         if (alignZero(distance - distance) < 0)
             throw new IllegalArgumentException("distance from camera cant be 0 ");
         this.distance = distance;
+        this.pC = p0.add(vTo.scale(this.distance));
         return this;
     }
 
@@ -85,7 +87,7 @@ public class Camera {
         double yI = alignZero((((nY - 1) / 2d) - i) * (height / nY)),
                 xJ = alignZero((j - (nX - 1) / 2d) * (width / nX));
 
-        Point3D pIJ = p0.add(vTo.scale(distance)); // center of the VP
+        Point3D pIJ = pC; // center of the VP
         if (xJ != 0)
             pIJ = pIJ.add(vRight.scale(xJ));
         if (yI != 0)

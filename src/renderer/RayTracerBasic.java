@@ -37,12 +37,6 @@ public class RayTracerBasic extends RayTracerBase {
     private static final double INITIAL_K = 1.0;
 
     /**
-     * This constant represents the distance
-     * the normal vector being moved
-     */
-    private static final double DELTA = 0.1;
-
-    /**
      * Constructor create ray tracer basic
      * with given scene
      *
@@ -60,7 +54,7 @@ public class RayTracerBasic extends RayTracerBase {
      * @return Color at the given point
      */
     private Color calcColor(GeoPoint intersection, Ray ray) {
-        return calcColor(intersection, ray, MAX_CALC_COLOR_LEVEL, INITIAL_K).add(scene.ambientLight.getIntensity());
+        return calcColor(intersection, ray.getDir(), MAX_CALC_COLOR_LEVEL, INITIAL_K).add(scene.ambientLight.getIntensity());
     }
 
     /**
@@ -69,15 +63,18 @@ public class RayTracerBasic extends RayTracerBase {
      * effects.
      *
      * @param intersection - A point in the scene, which is on a geometric shape.
-     * @param ray          - The ray from the camera that hit the above point.
+     * @param v          - The ray direction that hits the above point.
      * @param level        - The current depth of the recursion.
      * @param k            - The current coefficient of K (depends on the
      *                     recursion).
      * @return Color at the given point
      */
-    private Color calcColor(GeoPoint intersection, Ray ray, int level, double k) {
-        Color color = intersection.geometry.getEmission().add(calcLocalEffects(intersection, ray, k));
-        return 1 == level ? color : color.add(calcGlobalEffects(intersection, ray.getDir(), level, k));
+    private Color calcColor(GeoPoint intersection, Vector v, int level, double k) {
+        Vector n = intersection.geometry.getNormal(intersection.point);
+        double vn = v.dotProduct(n);
+        if (isZero(vn)) return Color.BLACK;
+        Color color = intersection.geometry.getEmission().add(calcLocalEffects(intersection, v, n, vn, k));
+        return 1 == level ? color : color.add(calcGlobalEffects(intersection, v, n, vn, level, k));
     }
 
     /**
@@ -85,18 +82,19 @@ public class RayTracerBasic extends RayTracerBase {
      * and refraction.
      *
      * @param gp    - A point in the scene, which is on a geometric shape.
-     * @param v     - The ray from the camera that hit the above point.
+     * @param v     - The ray direction that hits the above point.
+     * @param n     - Normal to surface at intersection
+     * @param vn    - v*n - dot-product
      * @param level - The current depth of the recursion.
      * @param k     - The current coefficient of K (depends on the recursion).
      * @return Color at the given point.
      */
-    private Color calcGlobalEffects(GeoPoint gp, Vector v, int level, double k) {
+    private Color calcGlobalEffects(GeoPoint gp, Vector v, Vector n, double vn, int level, double k) {
         Color color = Color.BLACK;
-        Vector n = gp.geometry.getNormal(gp.point);
         Material material = gp.geometry.getMaterial();
         double kkr = k * material.kR;
         if (kkr > MIN_CALC_COLOR_K)
-            color = calcGlobalEffect(constructReflectedRay(gp.point, v, n), level, material.kR, kkr);
+            color = calcGlobalEffect(constructReflectedRay(gp.point, v, n, vn), level, material.kR, kkr);
         double kkt = k * material.kT;
         if (kkt > MIN_CALC_COLOR_K)
             color = color.add(calcGlobalEffect(constructRefractedRay(gp.point, v, n), level, material.kT, kkt));
@@ -111,38 +109,34 @@ public class RayTracerBasic extends RayTracerBase {
      * @param level - The current depth of the recursion.
      * @param kx    - The original coefficient.
      * @param kkx   - The current coefficient of K (depends on the recursion).
-     * @return
+     * @return light intensity of a global effect
      */
     private Color calcGlobalEffect(Ray ray, int level, double kx, double kkx) {
         GeoPoint gp = findClosestIntersection(ray);
-        return (gp == null ? scene.background : calcColor(gp, ray, level - 1, kkx).scale(kx));
+        return (gp == null ? scene.background : calcColor(gp, ray.getDir(), level - 1, kkx).scale(kx));
     }
 
     /**
      * Add calculated light contribution from all light sources.
      *
      * @param intersection - A point in the scene, which is on a geometric shape
-     * @param ray          - The ray from the camera that hit the above point
+     * @param v     - The ray direction that hits the above point.
+     * @param n     - Normal to surface at intersection
+     * @param vn    - v*n - dot-product
      * @return The color of the geometry according to the local variables, such as
      * the material and the light sources.
      */
-    private Color calcLocalEffects(GeoPoint intersection, Ray ray, double k) {
+    private Color calcLocalEffects(GeoPoint intersection, Vector v, Vector n, double vn, double k) {
 
         Geometry geometry = intersection.geometry;
         Point3D p = intersection.point;
         Material material = geometry.getMaterial();
 
-        Vector l, n = geometry.getNormal(p), v = ray.getDir();
-        double ln, sign = alignZero(v.dotProduct(n));
-
         Color color = Color.BLACK;
-        if (sign == 0)
-            return color;
-
         for (LightSource lightSource : scene.lights) {
-            l = lightSource.getL(p);
-            ln = alignZero(l.dotProduct(n));
-            if (sign * ln > 0) { // sign(ln) == sing(vn)
+            Vector l = lightSource.getL(p);
+            double ln = alignZero(l.dotProduct(n));
+            if (vn * ln > 0) { // sign(ln) == sing(vn)
                 double ktr = transparency(lightSource, l, n, intersection);
                 if (ktr * k > MIN_CALC_COLOR_K) {
                     Color lightIntensity = lightSource.getIntensity(p).scale(ktr);
@@ -198,10 +192,11 @@ public class RayTracerBasic extends RayTracerBase {
      * @param p - The point of the reflection, the point we hit the object.
      * @param v - The vector we hit the object at.
      * @param n - The normal to the point hit.
+     * @param vn - v*n (dot-product)
      * @return The new reflected ray.
      */
-    private Ray constructReflectedRay(Point3D p, Vector v, Vector n) {
-        return new Ray(p, v.subtract(n.scale(2 * alignZero(v.dotProduct(n)))), n);
+    private Ray constructReflectedRay(Point3D p, Vector v, Vector n, double vn) {
+        return new Ray(p, v.subtract(n.scale(2 * vn)), n);
     }
 
     /**

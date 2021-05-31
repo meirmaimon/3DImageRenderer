@@ -1,11 +1,8 @@
 package primitives;
 
-import geometries.Intersectable;
 import geometries.Intersectable.GeoPoint;
 
-import javax.lang.model.type.PrimitiveType;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static primitives.Util.alignZero;
