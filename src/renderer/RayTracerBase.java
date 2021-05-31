@@ -10,6 +10,9 @@ import scene.Scene;
  *
  */
 public abstract class RayTracerBase {
+    /**
+     * Scene that being traced
+     */
     protected Scene scene;
 
     /**

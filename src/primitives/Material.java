@@ -5,17 +5,42 @@ package primitives;
  * geometries in the scene
  */
 public class Material {
+    /**
+     * diffusion attenuation factor
+     */
     public double kD = 0.0;
+    /**
+     * transparency attenuation factor
+     */
     public double kT = 0.0;
+    /**
+     * reflection attenuation factor
+     */
     public double kR = 0.0;
+    /**
+     * specular attenuation factor
+     */
     public double kS = 0.0;
+    /**
+     * shininess factor
+     */
     public int nShininess = 0;
 
+    /**
+     * Set the transparency attenuation factor
+     * @param kT transparency attenuation factor
+     * @return this
+     */
     public Material setKt(double kT) {
         this.kT = kT;
         return this;
     }
 
+    /**
+     * Set the reflection attenuation factor
+     * @param kR reflection attenuation factor
+     * @return this
+     */
     public Material setKr(double kR) {
         this.kR = kR;
         return this;

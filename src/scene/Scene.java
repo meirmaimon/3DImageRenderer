@@ -14,10 +14,25 @@ import java.util.List;
  * the ambient light and the geometries
  */
 public class Scene {
+    /**
+     * Scene Name
+     */
     public String name;
+    /**
+     * Scene background color
+     */
     public Color background = Color.BLACK;
+    /**
+     * Scene ambient light
+     */
     public AmbientLight ambientLight = new AmbientLight();
+    /**
+     * Scene Geometries
+     */
     public Geometries geometries = new Geometries();
+    /**
+     * Scene light sources
+     */
     public List<LightSource> lights = new LinkedList<LightSource>();
 
 

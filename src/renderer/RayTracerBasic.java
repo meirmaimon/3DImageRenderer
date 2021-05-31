@@ -43,16 +43,6 @@ public class RayTracerBasic extends RayTracerBase {
     private static final double DELTA = 0.1;
 
     /**
-     * This constant used for calculation of transparency
-     */
-    private static final int MAX_CALC_COLOR_LEVEL = 10;
-    /**
-     * This constant used for calculation of reflection
-     */
-    private static final double MIN_CALC_COLOR_K = 0.001;
-
-
-    /**
      * Constructor create ray tracer basic
      * with given scene
      *
@@ -72,7 +62,6 @@ public class RayTracerBasic extends RayTracerBase {
     private Color calcColor(GeoPoint intersection, Ray ray) {
         return calcColor(intersection, ray, MAX_CALC_COLOR_LEVEL, INITIAL_K).add(scene.ambientLight.getIntensity());
     }
-
 
     /**
      * Function to calculate the color of a point in the scene, with additional
@@ -143,7 +132,7 @@ public class RayTracerBasic extends RayTracerBase {
         Point3D p = intersection.point;
         Material material = geometry.getMaterial();
 
-        Vector l, r, n = geometry.getNormal(p), v = ray.getDir();
+        Vector l, n = geometry.getNormal(p), v = ray.getDir();
         double ln, sign = alignZero(v.dotProduct(n));
 
         Color color = Color.BLACK;
@@ -157,9 +146,8 @@ public class RayTracerBasic extends RayTracerBase {
                 double ktr = transparency(lightSource, l, n, intersection);
                 if (ktr * k > MIN_CALC_COLOR_K) {
                     Color lightIntensity = lightSource.getIntensity(p).scale(ktr);
-                    r = l.subtract(n.scale(2 * ln));
-                    color = color.add(calcDiffusive(material.kD, ln, lightIntensity),
-                            calcSpecular(material.kS, r, v, material.nShininess, lightIntensity));
+                    color = color.add(lightIntensity.scale(calcDiffusive(material.kD, ln) + //
+                            calcSpecular(ln, material.kS, l, n, v, material.nShininess)));
                 }
             }
         }
@@ -186,28 +174,24 @@ public class RayTracerBasic extends RayTracerBase {
         return lightIntensity.scale(kS * vr);
     }
 
-
     /**
-     * Calculating the Color of the diffuse component of the object for the Phong
-     * model.
+     * Calculating  the diffuse component of the object for the Phong model
      *
-     * @param kD             - The diffuse coefficient
-     * @param ln             - The dot product of the lights' vector with the normal
-     *                       of the body
-     * @param lightIntensity - The intensity of the light
-     * @return The final diffuse component of the given object for the phong model.
+     * @param kD diffusion factor
+     * @param ln The dot product of the lights' vector with the normal
+     * @return the diffuse component
      */
-    private Color calcDiffusive(double kD, double ln, Color lightIntensity) {
+    private double calcDiffusive(double kD, double ln) {
         if (ln < 0)
             ln = -ln;
-        return lightIntensity.scale(kD * ln);
+        return (kD * ln);
     }
 
     /**
      * Check if a particular point is shaded or not
      *
-     * @param l  - The vector from light to point (p)
-     * @param n  - The normal at the point (p)
+     * @param l - The vector from light to point (p)
+     * @param n - The normal at the point (p)
      * @return False - there is shadow, True - there is no shadow
      */
     private double transparency(LightSource light, Vector l, Vector n, GeoPoint geoPoint) {

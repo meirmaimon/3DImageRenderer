@@ -7,6 +7,9 @@ import primitives.Color;
  * lights in the scene
  */
 abstract class Light {
+    /**
+     * Light's intensity
+     */
     protected Color intensity;
 
     /**

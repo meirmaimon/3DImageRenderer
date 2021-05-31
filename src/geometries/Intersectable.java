@@ -17,7 +17,13 @@ public interface Intersectable {
      * a point and the geometry its belong
      */
     public static class GeoPoint {
+        /**
+         * The GeoPoint Geometry
+         */
         public Geometry geometry;
+        /**
+         * the GeoPoint point
+         */
         public Point3D point;
 
         /**
@@ -33,7 +39,8 @@ public interface Intersectable {
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (o == null) return false;
+            if (!(o instanceof Point3D)) return false;
             GeoPoint geoPoint = (GeoPoint) o;
             return point.equals(geoPoint.point) && geometry == geoPoint.geometry;       //the same geometry
         }
