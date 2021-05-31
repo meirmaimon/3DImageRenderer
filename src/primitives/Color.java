@@ -16,7 +16,9 @@ public class Color {
     private double r =0.0 ;
     private double g = 0.0 ;
     private double b  =  0.0;
-
+    /**
+     * default color (0,0,0) BLACK
+     */
     public static final Color BLACK = new Color();
 
     /**

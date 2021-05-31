@@ -154,26 +154,6 @@ public class RayTracerBasic extends RayTracerBase {
         return color;
     }
 
-
-    /**
-     * Calculating the Color of the specular component of the object for the Phong
-     * model.
-     *
-     * @param kS             - The specular coefficient
-     * @param r              - The reflection of the light
-     * @param v              - The direction of the camera
-     * @param nShininess     - The shininess of the object
-     * @param lightIntensity - The intensity of the light
-     * @return The total specular component of the current object.
-     */
-    private Color calcSpecular(double kS, Vector r, Vector v, int nShininess, Color lightIntensity) {
-        double vr = alignZero(-v.dotProduct(r));
-        if (vr <= 0)
-            return Color.BLACK;
-        vr = Math.pow(vr, nShininess);
-        return lightIntensity.scale(kS * vr);
-    }
-
     /**
      * Calculating  the diffuse component of the object for the Phong model
      *
