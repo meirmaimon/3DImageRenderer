@@ -22,6 +22,11 @@ public class DirectionalLight extends Light implements LightSource {
         super(intensity);
         this.direction = direction.normalize();
     }
+    /**
+     * Set the side's size of the light
+     * @param size square's side size
+     */
+    public DirectionalLight setSize(double size) { this.size = size;return this;}
 
     @Override
     public Color getIntensity(Point3D p) {

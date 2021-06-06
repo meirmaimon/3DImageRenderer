@@ -84,12 +84,12 @@ public class ShadowTests {
         );
         scene.lights.add( //
                 new SpotLight(new Color(400, 240, 0), new Point3D(-100, -100, 200), new Vector(1, 1, -3)) //
-                        .setKl(1E-5).setKq(1.5E-7));
+                        .setKl(1E-5).setKq(1.5E-7).setSize(0.35));
 
         Render render = new Render(). //
                 setImageWriter(new ImageWriter("shadowSphereTriangleInitial1", 400, 400)) //
                 .setCamera(camera) //
-                .setRayTracer(new RayTracerBasic(scene));
+                .setRayTracer(new RayTracerAdvance(scene));
         render.renderImage();
         render.writeToImage();
     }
@@ -217,5 +217,27 @@ public class ShadowTests {
         render.renderImage();
         render.writeToImage();
 
+    }
+
+    @Test
+    public void sphereTriangleSoft() {
+        scene.geometries.add( //
+                new Sphere(new Point3D(12, 0, -100), 20) //
+                        .setEmission(new Color(java.awt.Color.BLUE)) //
+                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)), //
+                new Triangle(new Point3D(-30, -80, -280), new Point3D(80, 40, -280), new Point3D(-95, 50, -280)) //
+                        .setEmission(new Color(java.awt.Color.BLUE)) //
+                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)) //
+        );
+        scene.lights.add(new PointLight(new Color(500, 300, 0), new Point3D(50, -20, 10))//
+                .setKl(0.00001).setKq(0.000001).setSize(0.35));
+
+
+        Render render = new Render(). //
+                setImageWriter(new ImageWriter("shadowSoftTry1", 400, 400)) //
+                .setCamera(camera) //
+                .setRayTracer(new RayTracerAdvance(scene));
+        render.renderImage();
+        render.writeToImage();
     }
 }

@@ -58,6 +58,11 @@ public class PointLight extends Light implements LightSource{
         return this;
 
     }
+    /**
+     * Set the side's size of the light
+     * @param size square's side size
+     */
+    public PointLight setSize(double size) { this.size = size; return this;}
 
     @Override
     public Color getIntensity(Point3D p) {
