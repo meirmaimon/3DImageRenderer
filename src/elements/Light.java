@@ -11,10 +11,6 @@ abstract class Light {
      * Light's intensity
      */
     protected Color intensity;
-    /**
-     * Light's side size
-     */
-    protected double size = 0;
 
     /**
      * Constructor create a Light with the intensity given
@@ -32,12 +28,4 @@ abstract class Light {
         return intensity;
     }
 
-
-    /**
-     * Gets the Light's size
-     * @return Light's size
-     */
-    public double getSize() {
-        return size;
-    }
 }

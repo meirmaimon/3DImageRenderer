@@ -1,5 +1,7 @@
 package renderer;
 
+import elements.DirectionalLight;
+import elements.FinitLight;
 import elements.LightSource;
 import geometries.Geometry;
 import geometries.Intersectable;
@@ -27,31 +29,29 @@ public class RayTracerAdvance extends RayTracerBasic {
 
     /**
      * check how much the point is shaded
-     * @param light light source
-     * @param l light direction
-     * @param n point normal
+     *
+     * @param light    light source
+     * @param l        light direction
+     * @param n        point normal
      * @param geoPoint geoPoint being calcilated
      * @return level of transparency
      */
-    public double softTransparency(LightSource light, Vector l, Vector n, Intersectable.GeoPoint geoPoint, double nv) {
+    public double softTransparency(FinitLight light, Vector l, Vector n, Intersectable.GeoPoint geoPoint, double nv) {
         double sum = 0;
         int count = 0;
         double lightSize = light.getSize();
-        double lightDistance = light.getDistance(geoPoint.point);
-        Vector lightDirection = l.scale(-lightDistance); // from point to light source
-        Point3D pC = geoPoint.point.add(lightDirection);
-        BlackBoard blackBoard = new BlackBoard(pC, new Vector(0, 1, 0), new Vector(1, 0, 0), lightSize, lightSize);
+        Point3D pC = light.getPosition();
+        BlackBoard blackBoard = new BlackBoard(pC, l, lightSize, lightSize);
         var vectors = blackBoard.generateVectors(geoPoint.point);
         for (Vector vec : vectors) {
-            Vector vecNegative = vec.scale(-1);
+            Vector vecNegative = vec.scale(-1).normalize();
             double nVec = alignZero(n.dotProduct(vecNegative));
-            sum += super.transparency(light,vecNegative,n,geoPoint,nv,nVec);
-            if (nv * nVec < 0) continue;           //different sign - camera and light not same direction
-            //won't be calculated in the ktr average
+            sum += super.transparency(light, vecNegative, n, geoPoint, nv, nVec);
             count++;
         }
         return sum / count;
     }
+
     /**
      * Add calculated light contribution from all light sources.
      *
@@ -72,7 +72,9 @@ public class RayTracerAdvance extends RayTracerBasic {
         for (LightSource lightSource : scene.lights) {
             Vector l = lightSource.getL(p);
             double ln = alignZero(l.dotProduct(n));
-            double ktr = softTransparency(lightSource, l, n, intersection ,vn);
+            double ktr = (lightSource instanceof DirectionalLight) ?
+                    super.transparency(lightSource, l, n, intersection, vn, ln) : softTransparency((FinitLight) lightSource,
+                    l, n, intersection, vn);
             // sign(ln) == sing(vn)
             if (ktr * k > MIN_CALC_COLOR_K) {
                 Color lightIntensity = lightSource.getIntensity(p).scale(ktr);

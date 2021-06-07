@@ -168,26 +168,27 @@ public class RayTracerBasic extends RayTracerBase {
      * @param n - The normal at the point (p)
      * @return False - there is shadow, True - there is no shadow
      */
-//    protected double transparency(LightSource light, Vector l, Vector n, GeoPoint geoPoint) {
+//    protected double transparency(LightSource light, Vector l, Vector n, GeoPoint geoPoint, double nv , double nl) {
 //        double sum = 0;
 //        int count = 0;
-//        double nl = n.dotProduct(l);
-//        double nv;
+//        //double nl = n.dotProduct(l);
+//        double nVec;
 //        double lightSize = light.getSize();
 //        double lightDistance = light.getDistance(geoPoint.point);
 //        Vector lightDirection = l.scale(-lightDistance); // from point to light source
 //        Point3D pC = geoPoint.point.add(lightDirection);
-//        BlackBoard blackBoard = new BlackBoard(pC, new Vector(0, 1, 0), new Vector(1, 0, 0), lightSize, lightSize);
+//        BlackBoard blackBoard = new BlackBoard(pC,l, lightSize, lightSize);
 //        var vectors = blackBoard.generateVectors(geoPoint.point);
 //        Ray lightRay;
 //        for (Vector vec : vectors) {
 //            lightRay = new Ray(geoPoint.point, vec, n);
-//            nv = n.dotProduct(vec.scale(-1));
-//            if (nv * nl < 0) continue;           //different sign - camera and light not same direction
+//            nVec = n.dotProduct(vec.scale(-1));
+//            count++;
+//            if (nv * nVec < 0) continue;           //different sign - camera and light not same direction
 //            var intersections = scene.geometries.findGeoIntersections(lightRay);
 //            if (intersections == null) {
 //                sum += 1.0;
-//                count++;
+//                //count++;
 //                continue;
 //            }
 //            double ktrCurrent = 1.0;
@@ -201,7 +202,7 @@ public class RayTracerBasic extends RayTracerBase {
 //                }
 //            }
 //            sum += ktrCurrent;
-//            count++;
+//            //count++;
 //        }
 //        return sum / count;
 //    }
@@ -267,7 +268,7 @@ public class RayTracerBasic extends RayTracerBase {
     }
 
      protected double transparency(LightSource light, Vector l, Vector n, GeoPoint geoPoint , double vn ,double ln) {
-        if (vn*ln < 0 )         // sign(ln) != sing(vn)
+        if (vn*ln <= 0 )         // sign(ln) != sing(vn)
             return 0;
          Vector lightDirection = l.scale(-1); // from point to light source
          Ray lightRay = new Ray(geoPoint.point, lightDirection, n);

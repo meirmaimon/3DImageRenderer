@@ -29,7 +29,26 @@ class BlackBoard {
     /**
      * Number of rays in Column and row
      */
-    public static int NUM_RAYS = 5;
+    public static int NUM_RAYS = 15;
+
+    /**
+     * Creates blackboard orthogonal to the vector given with
+     * position height and width given
+     * @param pC position of the blackboard (the middle point)
+     * @param vTo vector orthogonal ot the
+     * @param height BlackBoards height
+     * @param width BlackBoards width
+     */
+    public BlackBoard(Point3D pC, Vector vTo,double height, double width) {
+        this.height = height;
+        this.width = width;
+        this.pC = pC;
+        createAxis(vTo);
+        this.rX = width / NUM_RAYS;                 //Pixel width
+        this.rY = height / NUM_RAYS;                //Pixel Height
+        points = new LinkedList<Point2D>();
+        createPoints();
+    }
 
     /**
      * Creates a BlackBoard with given param
@@ -87,6 +106,21 @@ class BlackBoard {
             vectors.add(pIJ.subtract(p0));
         }
         return vectors;
+    }
+
+    /**
+     * Creates Y Axis and X axis
+     * that are original to vector given
+     * @param vTo the vector the axis will be orthogonal to
+     */
+    private void createAxis(Vector vTo){
+        Point3D vToHead = vTo.getHead();
+        double y = vToHead.getY();
+        double z = vToHead.getZ();
+        Vector yAxis = new Vector(new Point3D(0,-z,y));
+        Vector xAxis = vTo.crossProduct(yAxis);
+        this.vUp = yAxis;
+        this.vRight = xAxis;
     }
 
 }
