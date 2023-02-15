@@ -30,5 +30,17 @@ public interface LightSource {
      */
     double getDistance(Point3D p);
 
+    /**
+     * Gets the Light's size
+     * @return Light's size
+     */
+    double getSize();
+
+    /**
+     * Gets the position of the light
+     * @return light position
+     */
+    Point3D getPosition();
+
 }
 

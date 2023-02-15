@@ -15,21 +15,14 @@ import static primitives.Util.isZero;
  */
 class BlackBoard {
 
-    //private Vector vTo;
     private Vector vUp;
     private Vector vRight;
-    private double height;
-    private double width;
-    //private int numRays;
+    private int numRays ;
     private double rX;
     private double rY;
     private Point3D pC;
     private List<Point2D> points;
 
-    /**
-     * Number of rays in Column and row
-     */
-    public static int NUM_RAYS = 15;
 
     /**
      * Creates blackboard orthogonal to the vector given with
@@ -39,13 +32,12 @@ class BlackBoard {
      * @param height BlackBoards height
      * @param width BlackBoards width
      */
-    public BlackBoard(Point3D pC, Vector vTo,double height, double width) {
-        this.height = height;
-        this.width = width;
+    public BlackBoard(Point3D pC, Vector vTo,double height, double width , int numRays) {
         this.pC = pC;
+        this.numRays = numRays;
         createAxis(vTo);
-        this.rX = width / NUM_RAYS;                 //Pixel width
-        this.rY = height / NUM_RAYS;                //Pixel Height
+        this.rX = width / numRays;                 //Pixel width
+        this.rY = height / numRays;                //Pixel Height
         points = new LinkedList<Point2D>();
         createPoints();
     }
@@ -57,16 +49,15 @@ class BlackBoard {
      * @param height BlackBoards height
      * @param width BlackBoards width
      */
-    public BlackBoard(Point3D pC , Vector vUp,Vector vRight, double height, double width) {
+    public BlackBoard(Point3D pC , Vector vUp,Vector vRight, double height, double width, int numRays) {
         this.pC = pC;
+        this.numRays = numRays;
         this.vUp = vUp.normalize();
         if (!isZero(vRight.dotProduct(vUp)))
             throw new IllegalArgumentException("BlackBoards Vup and Vright must ber orthogonal");
         this.vRight = vRight.normalize();
-        this.height = height;
-        this.width = width;
-        this.rX = width / NUM_RAYS;                 //Pixel width
-        this.rY = height / NUM_RAYS;                //Pixel Height
+        this.rX = width / numRays;                 //Pixel width
+        this.rY = height / numRays;                //Pixel Height
         points = new LinkedList<Point2D>();
         createPoints();                     // generate points when BlackBoard created
     }
@@ -75,10 +66,10 @@ class BlackBoard {
      * Creates 2D points and add them to points list
      */
     public void createPoints() {
-        for (int i = 0; i < NUM_RAYS; i++) {
-            for (int j = 0; j < NUM_RAYS; j++) {
-                double x = (j - (NUM_RAYS - 1) / 2) * rX;
-                double y = -(i - (NUM_RAYS - 1) / 2) * rY;
+        for (int i = 0; i < numRays; i++) {
+            for (int j = 0; j < numRays; j++) {
+                double x = (j - (numRays - 1) / 2) * rX;
+                double y = -(i - (numRays - 1) / 2) * rY;
                 points.add(new Point2D(x,y));
             }
 
@@ -103,7 +94,7 @@ class BlackBoard {
                 pIJ = pIJ.add(vRight.scale(x));
             if (!isZero(y))
                 pIJ = pIJ.add(vUp.scale(y));
-            vectors.add(pIJ.subtract(p0));
+            vectors.add(pIJ.subtract(p0));//.normalize());
         }
         return vectors;
     }

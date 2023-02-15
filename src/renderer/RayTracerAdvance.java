@@ -1,9 +1,6 @@
 package renderer;
 
-import elements.DirectionalLight;
-import elements.FinitLight;
 import elements.LightSource;
-import geometries.Geometry;
 import geometries.Intersectable;
 import primitives.*;
 import scene.Scene;
@@ -16,10 +13,15 @@ import static primitives.Util.alignZero;
  */
 public class RayTracerAdvance extends RayTracerBasic {
 
-
+    /**
+     * number of rays to cast to BlackBoard
+     * in row and column
+     */
+    protected int numRays = 25;
     /**
      * Constructor create ray tracer basic
      * with given scene
+     * create map of BlackBoard for each light source, so it will be create once for all points
      *
      * @param scene given scene
      */
@@ -36,12 +38,15 @@ public class RayTracerAdvance extends RayTracerBasic {
      * @param geoPoint geoPoint being calcilated
      * @return level of transparency
      */
-    public double softTransparency(FinitLight light, Vector l, Vector n, Intersectable.GeoPoint geoPoint, double nv) {
+    public double transparency(LightSource light, Vector l, Vector n, Intersectable.GeoPoint geoPoint, double nv,double ln) {
+        double lightSize = light.getSize();
+        if(lightSize == 0 || numRays == 1)
+            return super.transparency(light,l, n,geoPoint,nv,ln);
         double sum = 0;
         int count = 0;
-        double lightSize = light.getSize();
+
         Point3D pC = light.getPosition();
-        BlackBoard blackBoard = new BlackBoard(pC, l, lightSize, lightSize);
+        BlackBoard blackBoard = new BlackBoard(pC, l, lightSize, lightSize,numRays);
         var vectors = blackBoard.generateVectors(geoPoint.point);
         for (Vector vec : vectors) {
             Vector vecNegative = vec.scale(-1).normalize();
@@ -53,36 +58,13 @@ public class RayTracerAdvance extends RayTracerBasic {
     }
 
     /**
-     * Add calculated light contribution from all light sources.
-     *
-     * @param intersection - A point in the scene, which is on a geometric shape
-     * @param v            - The ray direction that hits the above point.
-     * @param n            - Normal to surface at intersection
-     * @param vn           - v*n - dot-product
-     * @return The color of the geometry according to the local variables, such as
-     * the material and the light sources.
+     * Set the number of rays that cast to the blackboard
+     * in row and column
+     * @param numRays number of rays that cast to the blackboard
      */
-    protected Color calcLocalEffects(Intersectable.GeoPoint intersection, Vector v, Vector n, double vn, double k) {
-
-        Geometry geometry = intersection.geometry;
-        Point3D p = intersection.point;
-        Material material = geometry.getMaterial();
-
-        Color color = Color.BLACK;
-        for (LightSource lightSource : scene.lights) {
-            Vector l = lightSource.getL(p);
-            double ln = alignZero(l.dotProduct(n));
-            double ktr = (lightSource instanceof DirectionalLight) ?
-                    super.transparency(lightSource, l, n, intersection, vn, ln) : softTransparency((FinitLight) lightSource,
-                    l, n, intersection, vn);
-            // sign(ln) == sing(vn)
-            if (ktr * k > MIN_CALC_COLOR_K) {
-                Color lightIntensity = lightSource.getIntensity(p).scale(ktr);
-                color = color.add(lightIntensity.scale(calcDiffusive(material.kD, ln) + //
-                        calcSpecular(ln, material.kS, l, n, v, material.nShininess)));
-            }
-
-        }
-        return color;
+    public RayTracerAdvance setNumRays(int numRays) {
+        this.numRays = numRays;
+        return this;
     }
+
 }

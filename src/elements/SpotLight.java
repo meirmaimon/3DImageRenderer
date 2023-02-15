@@ -33,4 +33,7 @@ public class SpotLight extends PointLight{
             return Color.BLACK;             //intensity.scale(0)
         return super.getIntensity(p).scale(dotProduct);
     }
+    @Override
+    public SpotLight setSize(double size) {this.size = size;return this;}
+
 }

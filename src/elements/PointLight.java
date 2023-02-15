@@ -8,9 +8,10 @@ import primitives.Vector;
  * this class this class represents the source of spot light in space
  * extends from Light and implements from LightSource
  */
-public class PointLight extends Light implements FinitLight{
+public class PointLight extends Light implements LightSource{
     private Point3D position;
-    private double kC,kL,kQ ,size;
+    private double kC,kL,kQ;
+    protected double size;
 
     /**
      * constructor that initializes the intensity and
