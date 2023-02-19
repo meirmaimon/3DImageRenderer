@@ -310,7 +310,7 @@ public class ShadowTests {
                 setImageWriter(new ImageWriter("softLongTime", 400, 400)) //
                 .setCamera(new Camera(new Point3D(0,-300,0),new Vector(0,1,0),new Vector(0,0,1)) //
                         .setViewPlaneSize(200, 200).setDistance(700)) //
-                .setRayTracer(new RayTracerAdvance(scene));
+                .setRayTracer(new RayTracerAdvance(scene)).setMultithreading(1);
         render.renderImage();
         render.writeToImage();
     }
