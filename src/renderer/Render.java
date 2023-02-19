@@ -232,6 +232,9 @@ public class Render {
         imageWriter.writePixel(col, row, color);
     }
 
+
+
+
     /**
      * This function renders image's pixel color map from the scene included with
      * the Renderer object - with multi-threading
